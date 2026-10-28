@@ -71,3 +71,10 @@ def test_c4_goodman_linhas_somam_um():
     g = _t("c4_goodman")
     s = g.groupby(["municipio", "origem_1t"])["proporcao"].sum()
     assert np.allclose(s, 1, atol=1e-4) and g["proporcao"].between(-1e-6, 1 + 1e-6).all()
+
+
+def test_c4_comparado_cinco_eleicoes():
+    c = _t("c4_comparado")
+    assert set(c["ano"]) == {2010, 2014, 2018, 2022, 2026}
+    m = c[(c["resultado"] == "Δ comparecimento") & (c["ano"] == 2026)]["media_pond"].iat[0]
+    assert abs(m - 1.85) < 0.3

@@ -224,6 +224,39 @@ def criterio4(bases: dict) -> None:
             "media_pond: média ponderada da variação. Coeficientes em p.p. por 1 DP de X.")
 
 
+def criterio4_comparado(anos: tuple[int, ...] = (2010, 2014, 2018, 2022, 2026)) -> None:
+    """Mobilização entre turnos em cinco eleições: mesmo modelo empilhado (EF município×ano), com
+    teste de que o coeficiente de 2026 difere do de cada eleição anterior. 2010 e 2014 usam as bases
+    do placebo (Fase D)."""
+    bases = {a: dados(a) for a in anos}
+    d = pd.concat(bases.values(), ignore_index=True)
+    d["mun_ano"] = d["id_municipio"].astype(str) + "_" + d["ano"].astype(str)
+    termos = []
+    for v in X:
+        for a in anos:
+            d[f"{v}_{a}"] = d[v] * (d["ano"] == a)
+            termos.append(f"{v}_{a}")
+    out, med = [], []
+    for y, rot in [("d_comp", "Δ comparecimento"), ("d_pt_apt", "Δ voto PT (% aptos)"),
+                   ("d_op_apt", "Δ voto opositor (% aptos)"), ("d_bn_apt", "Δ brancos e nulos (% aptos)")]:
+        f = _fit(f"{y} ~ " + " + ".join(termos), d, fe="mun_ano")
+        for v in X:
+            for a in anos:
+                est, ep, p = _comb(f, {f"{v}_{a}": 1})
+                linha = {"resultado": rot, "variavel": v, "ano": a, "beta": est, "ep": ep, "p": p}
+                if a != 2026:
+                    de, dep, dp = _comb(f, {f"{v}_2026": 1, f"{v}_{a}": -1})
+                    linha.update({"dif_2026_menos_ano": de, "ep_dif": dep, "p_dif": dp})
+                out.append(linha)
+        for a, s in d.groupby("ano"):
+            med.append({"resultado": rot, "ano": a, "media_pond": np.average(s[y], weights=s["aptos_t2"])})
+    t = pd.DataFrame(out).merge(pd.DataFrame(med), on=["resultado", "ano"])
+    _salvar(t, "faseC_c4_comparado",
+            "Critério 4 — mudança entre o 1º e o 2º turno por local em cinco eleições (p.p. dos aptos), EF município×ano",
+            "beta: p.p. por 1 DP de X (padronizado dentro da eleição). dif_2026_menos_ano: diferença do coeficiente de 2026 "
+            "para o da eleição da linha, com EP agrupado por município. media_pond: variação média ponderada.")
+
+
 def comparecimento_idade() -> None:
     """Comparecimento por faixa etária (TSE, município × zona): menor nível publicado com idade."""
     faixas = {"16 a 24": ["16 anos", "17 anos", "18 anos", "19 anos", "20 anos", "21 a 24 anos"],
@@ -399,6 +432,8 @@ def main(partes: list[str] | None = None) -> None:
         criterio2(bases)
     if "c4" in partes:
         criterio4(bases)
+    if "c4comp" in partes:
+        criterio4_comparado()
     if "idade" in partes:
         comparecimento_idade()
     if "c5" in partes:
