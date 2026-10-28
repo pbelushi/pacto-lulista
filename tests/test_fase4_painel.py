@@ -1,4 +1,4 @@
-"""Checks da Fase 4 — painéis (PLANO.md, seção 5)."""
+"""Checks da Fase 4 — painéis (docs/planos/PLANO.md, seção 5)."""
 
 import numpy as np
 import pandas as pd

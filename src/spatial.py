@@ -1,4 +1,4 @@
-"""Fase 7 (parte espacial) — PLANO.md, seção 5.
+"""Fase 7 (parte espacial) — docs/planos/PLANO.md, seção 5.
 
 Matriz de vizinhança: k = 8 vizinhos mais próximos pelos centroides das AMCs (projeção policônica,
 EPSG:5880), padronizada na linha. Não se usa contiguidade (rainha) porque a malha simplificada do

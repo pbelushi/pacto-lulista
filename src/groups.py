@@ -1,4 +1,4 @@
-"""Fase 2 — grupos de municípios (PLANO.md, seções 1, 1A e 5).
+"""Fase 2 — grupos de municípios (docs/planos/PLANO.md, seções 1, 1A e 5).
 
 Esquemas presidenciais (base 2010 → final 2026, config.yaml):
 1. Swing relativo: swing_m = (s_m,f − s_m,b) − (s_BR,f − s_BR,b), s = % do PT nos válidos.

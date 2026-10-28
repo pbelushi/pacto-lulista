@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "Se usar este código ou estes resultados, cite a versão arquivada no Zenodo."
+title: "O pacto lulista mudou de perfil? Painel municipal, locais de votação e episódios de polarização comparados (Brasil, 1994–2026; mundo, 1900–2025)"
+type: software
+version: 1.0.0
+date-released: 2026-10-28
+license: MIT
+repository-code: "https://github.com/pbelushi/pacto-lulista"
+authors:
+  - family-names: "Silva"
+    given-names: "Paulo Roberto"
+    orcid: "https://orcid.org/0000-0003-0997-4322"
+keywords:
+  - lulismo
+  - eleições presidenciais
+  - Brasil
+  - geografia eleitoral
+  - polarização política
+  - V-Dem
+  - análise de sobrevivência
+  - replicação
+abstract: >-
+  Pacote de replicação de três estudos sobre a base eleitoral do PT e a polarização: (1) painel municipal do 2º
+  turno presidencial 2006–2026; (2) análise por local de votação 2018–2026, com placebo 2010–2014 e entorno do Censo
+  2022; (3) 269 episódios de polarização intensa em 95 países (V-Dem, 1900–2025), seus desfechos e a posição do
+  Brasil. Todos os dados vêm de fontes oficiais e são baixados por script; `python -m src.pipeline` refaz todas as
+  tabelas e figuras.

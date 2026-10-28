@@ -1,4 +1,4 @@
-"""Checks da Fase 7 — espacial e robustez (PLANO.md, seção 5)."""
+"""Checks da Fase 7 — espacial e robustez (docs/planos/PLANO.md, seção 5)."""
 
 import numpy as np
 import pandas as pd

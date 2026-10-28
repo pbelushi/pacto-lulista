@@ -6,7 +6,9 @@ Conjuntos:
 - detalhe_votacao_munzona: aptos, comparecimento, abstenção, brancos e nulos por município × zona
 - votacao_partido_munzona: votos nominais e de legenda por partido × município × zona
 
-Uso: python -m src.ingest.tse_download [conjunto ...]
+Uso: python -m src.ingest.tse_download [conjunto ...] [ano ...]
+     (sem conjuntos: os três; sem anos: anos_eleicao do config.yaml. A Fase E do plano3 usa
+     detalhe_votacao_munzona votacao_candidato_munzona 1994 1998 2002.)
 """
 
 from __future__ import annotations
@@ -27,4 +29,5 @@ def baixar_tse(conjuntos: list[str] | None = None, anos: list[int] | None = None
 
 
 if __name__ == "__main__":
-    baixar_tse(sys.argv[1:] or None)
+    args = sys.argv[1:]
+    baixar_tse([a for a in args if not a.isdigit()] or None, [int(a) for a in args if a.isdigit()] or None)

@@ -1,6 +1,6 @@
 # O "pacto lulista" mudou de perfil? (2006–2026)
 
-*Relatório consolidado da Fase 8. Versão de 27/10/2026, com todas as fontes incorporadas até esta data. Pipeline em `src/`, tabelas em `outputs/tables/` e figuras em `outputs/figures/` (PNG 300 dpi e SVG). Decisões de dados e pendências em `outputs/pendencias.md`. Este relatório substitui as notas parciais `fase5_achados.md`, `fase6_achados.md`, `fase7_achados.md` e `atualizacao_pbf_comex_idhm.md`.*
+*Relatório consolidado da Fase 8. Versão de 28/10/2026 (inclui o teste extra de coortes), com todas as fontes incorporadas até esta data. Pipeline em `src/`, tabelas em `outputs/tables/` e figuras em `outputs/figures/` (PNG 300 dpi e SVG). Decisões de dados e pendências em `outputs/pendencias.md`. Este relatório substitui as notas parciais (em `outputs/report/superadas/`) `fase5_achados.md`, `fase6_achados.md`, `fase7_achados.md` e `atualizacao_pbf_comex_idhm.md`.*
 
 > **Leitura ecológica.** Todos os resultados descrevem **municípios, não eleitores**. "Municípios com mais evangélicos se deslocaram contra o PT" não implica que "evangélicos votaram contra o PT".
 
@@ -31,6 +31,7 @@
    - O PL de 2022–2026 tem um voto para a Câmara muito mais estruturado socialmente que o PSDB (R² 0,63 contra 0,28–0,39).
    - O voto do PL é mais branco, mais evangélico e menos beneficiário do Bolsa Família. O β do Bolsa Família no voto do partido antipetista foi de +0,9 (PSDB 2006) a −3,3 (PL 2026).
 7. **H3 (commodities) não se sustenta** com dados municipais: o Comex mede domicílio fiscal, e a maioria dos municípios não exporta. **H4 (recomposição urbana)** só vale para as capitais.
+8. **Geração 1970–1990 (teste extra).** Com controles, os municípios com mais eleitores nascidos entre 1970 e 1990 são os menos petistas desde 2018, abaixo dos mais jovens e dos mais velhos (cerca de −2 p.p. por DP em 2026). Em 2010 não era assim, e a vantagem petista dos municípios jovens sobre os mais velhos desapareceu. Leitura municipal, não individual (seção 9).
 
 ---
 
@@ -166,7 +167,7 @@ O teste conjunto de igualdade dos β (modelo empilhado com X × ano e EF de UF �
 - **H1 (persistência):** sustentada. O Bolsa Família é o marcador de pobreza mais forte e cresceu. A dependência do Estado (% VAB adm. pública) fica estável e positiva. O IDHM 2010 não tem efeito próprio quando entra no lugar de PIB per capita e Ideb (+0,4, p = 0,64).
 - **H2 (religião):** fortemente sustentada. A virada acontece entre 2014 e 2022. Pela spec. B não dá para localizar 2018, porque raça e religião ficam de fora.
 - **H3 (produtiva):** não sustentada. Com UF, renda e pobreza controladas, nem o VAB agropecuário nem as exportações de commodities mostram mudança.
-- **H4 (urbana/racial):** só a parte urbana, e só nas capitais (ver seção 7). A parte racial vai no sentido oposto: a raça perde peso.
+- **H4 (urbana/racial):** só a parte urbana, e só nas capitais (ver seção 8). A parte racial vai no sentido oposto: a raça perde peso.
 - **Mercado de trabalho:**
   - A desocupação passa a se associar ao voto no PT.
   - A informalidade muda de sinal (negativa em 2006–2010, positiva depois), mas o efeito é pequeno e não absorve o efeito do Bolsa Família.
@@ -321,7 +322,70 @@ Especificações:
 
 ---
 
-## 9. Balanço das hipóteses
+## 9. Teste extra: coortes etárias e voto
+
+Com controles, os municípios com mais eleitores nascidos entre 1970 e 1990 são os menos petistas desde 2018, abaixo tanto dos mais jovens quanto dos mais velhos; em 2010 não era assim. Teste fora do PLANO, com o eleitorado do TSE (perfil do eleitorado por faixa etária) e checado com o Censo. Detalhes em [`extra_coortes.md`](extra_coortes.md).
+
+**Coortes:**
+- **"jovens":** nascidos a partir de 1991 (em 2026, até 35 anos);
+- **"meio":** nascidos entre 1970 e 1990;
+- **"mais velhos":** nascidos até 1969 (em 2026, 57 anos ou mais).
+
+As faixas de 5 anos do TSE são repartidas entre as coortes pela sobreposição com o intervalo de nascimento; o corte tem cerca de um ano de imprecisão. O TSE não informa a idade em 2006. Os totais batem com os aptos, e as coortes têm correlação de 0,72 a 0,93 com as do Censo, por AMC.
+
+![Eleitores nascidos a partir de 1991 e voto no PT por quintil](../figures/extra_tse_coortes_jovens.png)
+
+*Figura 9. Eleitores nascidos a partir de 1991 e s_PT por quintil da sua participação no eleitorado, no Brasil (média ponderada) e dentro de cada UF (média simples das AMCs). Fonte: TSE, perfil do eleitorado por faixa etária e município e 2º turno presidencial, 2010–2026.*
+
+| Eleição | Nascidos 1991+ | % do eleitorado | % 1970–1990 | % até 1969 |
+|---|---|---|---|---|
+| 2010 | 7,5 mi | 5,5 | 48,5 | 46,0 |
+| 2014 | 19,2 mi | 13,5 | 45,4 | 41,1 |
+| 2018 | 30,7 mi | 20,9 | 42,6 | 36,5 |
+| 2022 | 42,9 mi | 27,5 | 40,3 | 32,2 |
+| 2026 | 51,5 mi | 32,7 | 38,8 | 28,5 |
+
+Onde os jovens pesam mais (s_PT do quintil com mais jovens menos o do quintil com menos, em p.p.):
+
+| Eleição | Brasil | Dentro da mesma UF |
+|---|---|---|
+| 2010 | +20,9 | +8,2 |
+| 2014 | +29,2 | +8,5 |
+| 2018 | +30,3 | +9,5 |
+| 2022 | +18,8 | +6,6 |
+| 2026 | +16,0 | +5,4 |
+
+- **Brasil:** a diferença grande é região (os municípios mais jovens estão no Norte e no Nordeste) e vem caindo desde 2018.
+- **Dentro da mesma UF:** os municípios mais jovens seguem mais petistas em todas as eleições, com diferença menor desde 2018.
+  - Com média ponderada pelo eleitorado, a comparação parece se inverter em 2022–2026 (−3).
+  - É efeito das capitais: são as cidades menos jovens de cada UF, caem no quintil "menos jovem" e dominam a média ponderada. O PT ganhou terreno nelas.
+
+![Coortes do eleitorado e voto, por eleição](../figures/extra_tse_coortes_betas.png)
+
+*Figura 10. Contrastes entre coortes (p.p. de voto por 1 p.p. do eleitorado transferido de uma coorte para outra), por eleição, sem e com controles, IC 95%. Fonte: TSE, perfil do eleitorado e 2º turno presidencial e deputado federal, 2010–2026; controles da spec. A da Fase 6 (2018: spec. B).*
+
+Com controles (s_PT; β por 1 p.p. do eleitorado; "n.s." = não significativo a 5%):
+
+| Contraste | 2010 | 2014 | 2018 | 2022 | 2026 |
+|---|---|---|---|---|---|
+| 1991+ vs. 1970–90 | +0,98 | +1,02 | +1,71 | +1,18 | +1,04 |
+| 1991+ vs. até 1969 | +1,18 | +0,93 | +0,95 | +0,48 | +0,11 (n.s.) |
+| 1970–90 vs. até 1969 | +0,20 (n.s.) | −0,09 (n.s.) | −0,75 | −0,70 | −0,93 |
+
+- **A coorte do meio é a menos petista desde 2018:** cerca de −2 p.p. de s_PT por desvio-padrão da sua participação em 2026, contra a mais velha. O mesmo padrão aparece com o Censo, mais fraco (−1,1 a −1,4 por DP).
+- **Não é um traço fixo da geração:** em 2006–2010 a associação era neutra ou levemente positiva para o PT. O padrão surge a partir de 2018. Com dados municipais não dá para separar efeito de geração de efeito de idade.
+- **A vantagem dos municípios jovens sobre os mais velhos desapareceu:** clara em 2010, nula em 2026.
+- **Câmara (p_ANTI):** sem controles, mais eleitores da coorte do meio acompanham mais voto no PL (+1,22 em 2026); com controles, a associação some.
+- **Ressalvas:**
+  - A leitura é sobre municípios, não eleitores; o teste individual pede surveys com ano de nascimento, como o ESEB.
+  - O eleitor vota onde tem o título, que pode não ser onde mora.
+  - O alistamento aos 16 e 17 anos é facultativo.
+
+---
+
+## 10. Balanço das hipóteses
+
+H1, H2 e H6 se sustentam; H3 não; H4 é parcial; H5 se sustenta na primeira parte e é refutada na segunda.
 
 | Hipótese | Veredito | Evidência central |
 |---|---|---|
@@ -332,10 +396,11 @@ Especificações:
 | H5. Lulismo × petismo | **Sustentada na primeira parte; a segunda é refutada** | O hiato cresce onde há Bolsa Família e o voto proporcional do PT não acompanha a pobreza; mas a base proporcional convergiu para o território lulista, não para a velha base urbana |
 | H6. Enraizamento do antipetismo | **Sustentada** | PL lidera a Câmara em 53% do eleitorado; voto para a Câmara estruturado por pobreza, raça e religião (R² 0,63 contra ≤ 0,39 do PSDB) |
 | H0. "O pacto mudou" | **Sustentada pela decomposição** | Comportamento −8,9 / −4,5 p.p.; composição +4,2 / −0,3 |
+| Extra. Antipetismo na coorte de 1970–1990 | **Sustentada com controles, a partir de 2018** (nível municipal) | Municípios com mais eleitores dessa coorte são os menos petistas desde 2018 (−2 p.p. por DP em 2026, TSE); em 2010 a associação era neutra; sem controles e na Câmara, não aparece |
 
 ---
 
-## 10. Limitações
+## 11. Limitações
 
 1. **Falácia ecológica.** Tudo é municipal. Afirmações sobre indivíduos exigem surveys (ESEB 2010–2022), que não foram usados.
 2. **Mudança do opositor.** O adversário passou de PSDB (2006–2014) a bolsonarismo (2018–2026). Parte do deslocamento é de oferta, não de base, o que é substantivo para a pergunta, não ruído.
@@ -366,14 +431,8 @@ Especificações:
 ## Reprodução
 
 ```
-python -m src.ingest.<fonte>   # downloads (data/raw/, nunca editado à mão) e data/interim/
-python -m src.groups           # Fase 2
-python -m src.build_panel      # Fase 4
-python -m src.descriptives     # Fase 5
-python -m src.models           # Fase 6
-python -m src.spatial          # Fase 7 (espacial)
-python -m src.robustness       # Fase 7 (robustez)
-pytest tests/                  # checks de todas as fases
+python -m src.pipeline --estudo 1 --testes   # etapas 1.01–1.26: downloads, Fases 1–7 e teste de coortes
+python -m src.pipeline --listar              # comando de cada etapa
 ```
 
-Parâmetros (anos, partidos, limiares, mapa de AMCs, alinhamento das covariáveis) em `config.yaml`. Dicionário de variáveis em `outputs/tables/dicionario.md`.
+Parâmetros (anos, partidos, limiares, mapa de AMCs, alinhamento das covariáveis) em `config.yaml`. Dicionário de variáveis em `outputs/tables/dicionario.md`. Instruções completas no `README.md` da raiz.

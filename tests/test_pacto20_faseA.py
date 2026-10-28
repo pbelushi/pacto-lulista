@@ -1,4 +1,4 @@
-"""Checks da Fase A do pacto 2.0 (plano2.md): base por local de votação 2018, 2022, 2026."""
+"""Checks da Fase A do pacto 2.0 (docs/planos/plano2.md): base por local de votação 2018, 2022, 2026."""
 
 import numpy as np
 import pandas as pd

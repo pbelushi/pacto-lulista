@@ -3,7 +3,7 @@
 Arquivos (src/ingest/comex_download.py): EXP/IMP_COMPLETA_MUN.zip (1997–abr/2025) e EXP/IMP_2025_MUN.csv
 (o arquivo anual substitui o ano correspondente do completo, que estava incompleto). Colunas: CO_ANO, SH4, SG_UF_MUN, CO_MUN, VL_FOB (US$).
 
-Cuidados (PLANO.md, seção 3):
+Cuidados (docs/planos/PLANO.md, seção 3):
 - Município = **domicílio fiscal da empresa**, não local de produção (viés de sede).
 - Códigos de município: o Comex usa o código IBGE, exceto em SP, GO, MS e DF, onde o prefixo difere.
   Deslocamentos verificados empiricamente (100% dos códigos caem em municípios IBGE): SP +100000,

@@ -1,4 +1,4 @@
-"""Pacto 2.0 — Fase A: base por local de votação (2018, 2022, 2026). Plano em plano2.md.
+"""Pacto 2.0 — Fase A: base por local de votação (2018, 2022, 2026). Plano em docs/planos/plano2.md.
 
 Entradas (data/raw/tse_secao/, baixadas por src.ingest.tse_secao_download):
 - votacao_secao_<ano>_BR.zip: presidente por seção, 1º e 2º turnos (NR_VOTAVEL = número do candidato;

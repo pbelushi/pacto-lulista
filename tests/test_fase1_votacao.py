@@ -1,4 +1,4 @@
-"""Checks da Fase 1 — votação do 2º turno presidencial (PLANO.md, seção 5)."""
+"""Checks da Fase 1 — votação do 2º turno presidencial (docs/planos/PLANO.md, seção 5)."""
 
 import json
 
@@ -52,7 +52,7 @@ def totais():
 
 @pytest.mark.parametrize("ano", ANOS)
 def test_share_nacional_bate_com_tse(totais, ano):
-    """Totais com exterior e trânsito: s_PT dentro de 0,01 p.p. do oficial (PLANO.md, Fase 1)."""
+    """Totais com exterior e trânsito: s_PT dentro de 0,01 p.p. do oficial (docs/planos/PLANO.md, Fase 1)."""
     pt, op = _oficial(ano)
     t = totais.loc[ano]
     s_ofic = 100 * pt / (pt + op)

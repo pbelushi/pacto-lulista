@@ -1,4 +1,4 @@
-"""Fase 7 (robustez) — PLANO.md, seção 5, itens (a)–(i).
+"""Fase 7 (robustez) — docs/planos/PLANO.md, seção 5, itens (a)–(i).
 
 Estimativas centrais acompanhadas em todas as especificações:
   E1  Δβ (ano final − ano base) do voto presidencial s_pt: % evangélica, % negra, % VAB adm. pública,

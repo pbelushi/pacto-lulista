@@ -1,4 +1,4 @@
-"""Checks da Fase 5 — descritivas (PLANO.md, seção 5)."""
+"""Checks da Fase 5 — descritivas (docs/planos/PLANO.md, seção 5)."""
 
 import pandas as pd
 import pytest

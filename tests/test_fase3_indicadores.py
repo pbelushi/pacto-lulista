@@ -1,4 +1,4 @@
-"""Checks da Fase 3 — ingestão dos indicadores (PLANO.md, seções 3 e 5).
+"""Checks da Fase 3 — ingestão dos indicadores (docs/planos/PLANO.md, seções 3 e 5).
 
 Cada fonte é testada só se o arquivo intermediário existir (fontes pendentes ficam em
 outputs/pendencias.md); a ausência das fontes já implementadas é falha.

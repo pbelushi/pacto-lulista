@@ -4,7 +4,7 @@
 
 ### 2026: 2º turno ausente do CDN de Dados Abertos (27/10/2026)
 - `votacao_candidato_munzona_2026.zip` e `detalhe_votacao_munzona_2026.zip` foram gerados em 25/10/2026, por volta de 12h30 (horário de Brasília), antes do fim da votação, e só têm o 1º turno.
-- **Fallback adotado** (PLANO.md, seção 3): JSON do Portal Resultados, eleição 6258 (federal, 2º turno), um arquivo por município (`src/ingest/tse_portal.py`). Todos os arquivos estão 100% totalizados (`s.st == s.ts`).
+- **Fallback adotado** (docs/planos/PLANO.md, seção 3): JSON do Portal Resultados, eleição 6258 (federal, 2º turno), um arquivo por município (`src/ingest/tse_portal.py`). Todos os arquivos estão 100% totalizados (`s.st == s.ts`).
 - **Ação:** quando o TSE republicar os arquivos de 2026 com o 2º turno, rodar de novo `python -m src.ingest.tse_download` e `python -m src.ingest.tse`. O código detecta o 2º turno no CDN e passa a usá-lo automaticamente. Depois, comparar com a versão do portal.
 
 ### Voto em trânsito
@@ -216,7 +216,7 @@
 - **Cor/raça no TSE:** não existe em 2018 (#NE) e, em 2026, ~71% do eleitorado está como "não informado" (amostra AC). Não serve como variável por local; a composição racial virá do Censo 2022 por setor (Fase B).
 - **Geocodificação externa:** não feita, por decisão do usuário. Locais sem coordenada são contados e ficam sem entorno. Cobertura de coordenadas em 2018: 79% dos locais e 83% dos votos (lacuna concentrada em MG, BA e ES).
 - **Número do local:** o arquivo de votação usa `NR_LOCAL_VOTACAO_ORIGINAL` do cadastro (100% das seções em 2018). `NR_LOCAL_VOTACAO` difere em ~0,5% (seções realocadas depois) e o número no detalhe difere em ~3%. A base usa o número original; o detalhe é casado por seção e turno; as seções realocadas ficam marcadas (`secoes_realocadas`).
-- **Escopo (decisão do usuário, 27/10/2026):** só a votação para presidente. O deputado federal sai da base por local e o **Critério 3 do plano2.md (voto proporcional / bloco de esquerda) não será estimado**.
+- **Escopo (decisão do usuário, 27/10/2026):** só a votação para presidente. O deputado federal sai da base por local e o **Critério 3 do docs/planos/plano2.md (voto proporcional / bloco de esquerda) não será estimado**.
   - **Motivo (do usuário):** a abstenção caiu bastante do 1º para o 2º turno de 2026, e muitos eleitores de Lula no 2º turno não votaram no 1º; portanto também não votaram para deputado. Para a tese do pacto 2.0, centrada em quem decidiu o 2º turno, o voto para deputado (só no 1º turno) diz pouco sobre essa base. A queda da abstenção entre os turnos será quantificada na base por local (comparecimento no 1º e no 2º turno) e é o objeto do Critério 4. Os arquivos por UF já baixados ficam em `data/raw/tse_secao/votacao_secao/`, e a função `camara()` fica no código, sem ser chamada.
 - **Cadastro de locais de 2026:** vem em um CSV por UF mais `_BRASIL` e `_ZZ`; coordenadas com vírgula decimal. O primeiro processamento leu só AL e perdeu as coordenadas; corrigido (usa o `_BRASIL`). O detalhe de 2022 e 2026 tem `_BR` (presidente) e `_BRASIL` (todos os cargos): usa-se só o `_BR`.
 - **Abstenção nacional de 2026 (referência do usuário, conferida na base por local):** 21,08% no 1º turno e 19,22% no 2º, com exterior; sem exterior (escopo da base por local), 20,84% e 18,99%. A queda de ~1,9 p.p. é a referência agregada do Critério 4; a análise usa o recorte por local.

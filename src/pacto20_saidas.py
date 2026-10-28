@@ -1,4 +1,4 @@
-"""Fase E do pacto 2.0 (plano2.md): figuras (PNG 300 dpi + SVG em outputs/figures/).
+"""Fase E do pacto 2.0 (docs/planos/plano2.md): figuras (PNG 300 dpi + SVG em outputs/figures/).
 
 - pacto20_mapas_capitais: s_PT no 2º turno por local de votação (células de Voronoi) em São Paulo,
   Rio de Janeiro, Salvador e Belo Horizonte, 2018 × 2026

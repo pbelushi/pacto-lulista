@@ -1,4 +1,4 @@
-"""IPCA para deflacionar valores monetários (base dez/2025, PLANO.md Fase 3).
+"""IPCA para deflacionar valores monetários (base dez/2025, docs/planos/PLANO.md Fase 3).
 
 Tabela SIDRA 1737 "IPCA - Série histórica com número-índice..." (v2266 número-índice, dez/1993 = 100),
 nível Brasil, mensal (ID conferido em 27/10/2026).

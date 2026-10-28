@@ -1,4 +1,4 @@
-"""Checks da Fase B do pacto 2.0 (plano2.md): entorno censitário dos locais de votação."""
+"""Checks da Fase B do pacto 2.0 (docs/planos/plano2.md): entorno censitário dos locais de votação."""
 
 import numpy as np
 import pandas as pd

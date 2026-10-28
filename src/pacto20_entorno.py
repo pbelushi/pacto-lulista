@@ -1,4 +1,4 @@
-"""Pacto 2.0 — Fase B: entorno censitário de cada local de votação (plano2.md).
+"""Pacto 2.0 — Fase B: entorno censitário de cada local de votação (docs/planos/plano2.md).
 
 Setores censitários do Censo 2022 (src/ingest/ibge_setores.py):
 - malha BR_setores_CD2022.gpkg (CD_SETOR, CD_MUN, SITUACAO, AREA_KM2, v0001 = pessoas);
@@ -7,7 +7,7 @@ Setores censitários do Censo 2022 (src/ingest/ibge_setores.py):
 - renda do responsável (V06001 responsáveis em DPPO; V06004 rendimento nominal médio dos responsáveis
   com rendimento; V06006 mediano), em R$ de jul/2022, convertido a R$ de dez/2025 pelo IPCA (fator do
   ano de 2022 em data/interim/ipca.parquet).
-Escopo: municípios com ≥ 10 locais de votação no ano (plano2.md, Fase B, item 4) e locais com coordenada.
+Escopo: municípios com ≥ 10 locais de votação no ano (docs/planos/plano2.md, Fase B, item 4) e locais com coordenada.
 
 Entorno de cada local, em EPSG:5880 (metros):
   (a) Voronoi dos locais do município, recortado pelo limite municipal (união dos setores do município).

@@ -1,6 +1,6 @@
 """Fase C do plano3: pré-codificação automática dos desfechos dos episódios de polarização.
 
-Códigos (plano3.md): R1 ruptura vencida por um polo; R2 cesarismo (força apresentada como acima dos polos);
+Códigos (docs/planos/plano3.md): R1 ruptura vencida por um polo; R2 cesarismo (força apresentada como acima dos polos);
 P pacto; D despolarização sem ruptura; C censurado.
 
 Ano de desfecho t: o último ano do episódio, se terminou em ruptura; se terminou por despolarização, a primeira

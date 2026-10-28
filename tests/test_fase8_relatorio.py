@@ -1,4 +1,4 @@
-"""Checks da Fase 8 — relatório (PLANO.md, Fase 8)."""
+"""Checks da Fase 8 — relatório (docs/planos/PLANO.md, Fase 8)."""
 
 import re
 

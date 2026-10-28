@@ -1,4 +1,4 @@
-"""Fase D do pacto 2.0 (plano2.md): robustez dos modelos por local de votação.
+"""Fase D do pacto 2.0 (docs/planos/plano2.md): robustez dos modelos por local de votação.
 
 Modelo de referência: empilhado 2018/2022/2026 do Critério 2 (s_PT no 2º turno ~ X×ano, EF município×ano),
 que dá β por eleição e Δβ. Variantes:

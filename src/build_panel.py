@@ -1,4 +1,4 @@
-"""Fase 4 — painéis (PLANO.md, seção 5).
+"""Fase 4 — painéis (docs/planos/PLANO.md, seção 5).
 
 Entradas: data/interim/*.parquet das Fases 1, 1B e 3 e data/processed/grupos_*.parquet da Fase 2.
 Fontes incluídas: IBGE (população, Censos, PIB), INEP (Ideb), MDS via Ipeadata (beneficiários do Bolsa

@@ -1,4 +1,4 @@
-"""Fase C do pacto 2.0 (plano2.md): modelos por local de votação com efeito fixo de município.
+"""Fase C do pacto 2.0 (docs/planos/plano2.md): modelos por local de votação com efeito fixo de município.
 
 Base: data/interim/pacto20_locais_<ano>.parquet (Fase A) + pacto20_entorno_<ano>.parquet (Fase B).
 Escopo: municípios com >= 10 locais (MIN_LOCAIS) e locais com entorno Voronoi.

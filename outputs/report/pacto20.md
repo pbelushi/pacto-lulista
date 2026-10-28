@@ -1,6 +1,6 @@
 # Existe um "pacto lulista 2.0"? Evidência intraurbana por local de votação (2010–2026)
 
-*Relatório da Fase E do `plano2.md`. Versão de 28/10/2026. Código em `src/pacto20_*.py`, tabelas em `outputs/tables/pacto20_*`, figuras em `outputs/figures/pacto20_*` (PNG 300 dpi e SVG). Decisões de dados e pendências em `outputs/pendencias.md`.*
+*Relatório da Fase E do `docs/planos/plano2.md`. Versão de 28/10/2026. Código em `src/pacto20_*.py`, tabelas em `outputs/tables/pacto20_*`, figuras em `outputs/figures/pacto20_*` (PNG 300 dpi e SVG). Decisões de dados e pendências em `outputs/pendencias.md`.*
 
 > **Leitura ecológica.** A unidade é o **local de votação**, não o eleitor. "Locais com mais jovens votam mais no PT" não implica que "jovens votam mais no PT". O eleitor vota onde está o título, que nem sempre é onde mora. A composição racial e a renda vêm do **entorno censitário do local** (Censo 2022), não do eleitorado.
 
@@ -20,7 +20,7 @@
 | 4. Mobilização entre turnos de 2026 | **Sustentado** | 2026 é a única das cinco eleições com alta clara do comparecimento entre turnos (+1,9 p.p.). O PT cresceu mais em locais negros (+1,0 p.p. dos aptos/DP) e mais pobres (−0,24 por DP de renda); este último sinal é inédito na série. |
 | 5. Heterogeneidade | **Forte** | Padrão do Centro-Sul: negros +11,7 no Sul e +5,9 no Sudeste; −6,0 no Norte; jovens negativos no Nordeste (−0,24). Nas capitais o efeito de negros não é significativo. |
 
-**Veredito geral.** Pela regra do `plano2.md`, "pacto 2.0" exige os critérios 1, 2 e 3; com 1 parcial, 2 não sustentado e 3 não testado, não se sustenta. A combinação observada, critério 1 parcial e critério 4 sustentado, é a que o plano classifica como **mobilização conjuntural antibolsonarista**.
+**Veredito geral.** Pela regra do `docs/planos/plano2.md`, "pacto 2.0" exige os critérios 1, 2 e 3; com 1 parcial, 2 não sustentado e 3 não testado, não se sustenta. A combinação observada, critério 1 parcial e critério 4 sustentado, é a que o plano classifica como **mobilização conjuntural antibolsonarista**.
 
 ---
 

@@ -1,4 +1,4 @@
-"""Checks da Fase C do pacto 2.0 (plano2.md): modelos por local com EF de município."""
+"""Checks da Fase C do pacto 2.0 (docs/planos/plano2.md): modelos por local com EF de município."""
 
 import numpy as np
 import pandas as pd

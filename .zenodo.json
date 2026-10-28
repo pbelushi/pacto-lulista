@@ -1,0 +1,19 @@
+{
+  "title": "O pacto lulista mudou de perfil? Painel municipal, locais de votação e episódios de polarização comparados (Brasil, 1994–2026; mundo, 1900–2025)",
+  "upload_type": "software",
+  "version": "1.0.0",
+  "publication_date": "2026-10-28",
+  "language": "por",
+  "license": "MIT",
+  "creators": [
+    {
+      "name": "Silva, Paulo Roberto",
+      "orcid": "0000-0003-0997-4322"
+    }
+  ],
+  "description": "<p>Pacote de replicação de três estudos sobre a base eleitoral do PT e a polarização no Brasil:</p><ol><li><b>Pacto lulista</b>: painel municipal (5.565 AMCs) do 2º turno presidencial, 2006–2026; deslocamento da base territorial do voto petista (pobreza, religião, raça, Bolsa Família).</li><li><b>Pacto lulista 2.0</b>: ~80 mil locais de votação, 2018–2026, com placebo 2010–2014, ligados ao entorno censitário de 2022; teste de uma base jovem, negra e urbana.</li><li><b>A polarização se resolve?</b>: 269 episódios de polarização intensa em 95 países (V-Dem v16, 1900–2025); desfechos (vitória de um polo, cesarismo, pacto, despolarização), análise de sobrevivência com riscos competitivos e a posição do Brasil; indicadores eleitorais brasileiros 1994–2026.</li></ol><p>Todos os dados são públicos e baixados por script de fontes oficiais (TSE, IBGE, INEP, Ipeadata, Comex Stat, V-Dem, UCDP/PRIO, Archigos). O comando <code>python -m src.pipeline</code> refaz todas as tabelas e figuras; <code>data/manifesto_dados.csv</code> traz o SHA-256 dos dados usados. Textos em português.</p><p><b>English:</b> replication package for three studies on the electoral base of Brazil's Workers' Party (municipal panel 2006–2026; polling-station analysis 2010–2026) and on how episodes of intense political polarization end worldwide (V-Dem, 1900–2025).</p>",
+  "keywords": ["lulismo", "Brazil", "presidential elections", "electoral geography", "political polarization", "V-Dem", "survival analysis", "competing risks", "replication"],
+  "related_identifiers": [
+    {"identifier": "https://github.com/pbelushi/pacto-lulista", "relation": "isSupplementTo", "scheme": "url"}
+  ]
+}

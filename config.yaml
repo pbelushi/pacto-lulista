@@ -1,4 +1,4 @@
-# Parâmetros do projeto pacto-lulista (ver PLANO.md)
+# Parâmetros do projeto pacto-lulista (ver docs/planos/PLANO.md)
 
 caminhos:
   raw: data/raw
@@ -62,7 +62,7 @@ grupos:
 checks:
   tolerancia_pp: 0.01
 
-# Alinhamento temporal das covariáveis (PLANO.md, seção 3)
+# Alinhamento temporal das covariáveis (docs/planos/PLANO.md, seção 3)
 alinhamento:
   # indicadores anuais: último ano disponível <= eleição − defasagem
   defasagem_anual: 1

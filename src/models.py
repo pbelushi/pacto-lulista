@@ -1,4 +1,4 @@
-"""Fase 6 — modelos (PLANO.md, seção 5).
+"""Fase 6 — modelos (docs/planos/PLANO.md, seção 5).
 
 Covariáveis (DATASUS e % de cadastrados no CadÚnico pendentes):
   log_pop, log_pib_pc (PIB per capita real), part_vab_agro, part_vab_adm_publica, ideb,

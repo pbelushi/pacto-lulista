@@ -1,7 +1,7 @@
 """Download do 2º turno presidencial de 2026 via Portal Resultados do TSE (fallback).
 
 Os arquivos consolidados de Dados Abertos (votacao_candidato_munzona_2026.zip) foram
-publicados antes do 2º turno (25/10/2026) e não o contêm. Fallback previsto no PLANO.md,
+publicados antes do 2º turno (25/10/2026) e não o contêm. Fallback previsto no docs/planos/PLANO.md,
 seção 3: JSON do Portal Resultados, um arquivo por município.
 
 Endpoints (eleição federal 2º turno 2026 = código 6258, cargo Presidente = c0001):

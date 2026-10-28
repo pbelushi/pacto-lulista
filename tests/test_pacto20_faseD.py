@@ -1,4 +1,4 @@
-"""Checks da Fase D do pacto 2.0 (plano2.md): robustez."""
+"""Checks da Fase D do pacto 2.0 (docs/planos/plano2.md): robustez."""
 
 import numpy as np
 import pandas as pd

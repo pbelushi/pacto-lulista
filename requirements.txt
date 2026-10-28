@@ -1,0 +1,29 @@
+# Versões exatas da execução publicada (Python 3.13.7, Windows 11 Enterprise, 27–28/10/2026).
+# Instalação: python -m pip install -r requirements.txt
+# Opcional (inferência ecológica R×C, fora do pipeline): pyei==1.1.4
+pandas==2.3.3
+numpy==2.5.0
+pyarrow==24.0.0
+PyYAML==6.0.3
+requests==2.34.2
+urllib3==2.7.0
+truststore==0.10.4
+tabulate==0.10.0
+openpyxl==3.1.5
+xlrd==2.0.2
+scipy==1.18.0
+statsmodels==0.14.6
+scikit-learn==1.9.1
+matplotlib==3.11.0
+geopandas==1.2.0
+shapely==2.2.0
+pyogrio==0.13.0
+pyproj==3.8.0
+geobr==2.1.1
+libpysal==4.15.1
+esda==2.10.0
+spreg==1.9.1
+pyfixest==0.60.0
+lifelines==0.30.3
+pyreadr==0.5.8
+pytest==9.1.1

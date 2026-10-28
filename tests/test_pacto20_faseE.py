@@ -1,4 +1,4 @@
-"""Checks da Fase E do pacto 2.0 (plano2.md): figuras e relatório."""
+"""Checks da Fase E do pacto 2.0 (docs/planos/plano2.md): figuras e relatório."""
 
 import re
 

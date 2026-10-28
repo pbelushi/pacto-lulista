@@ -1,4 +1,4 @@
-"""Fase 5 — análise descritiva das trajetórias (PLANO.md, seção 5).
+"""Fase 5 — análise descritiva das trajetórias (docs/planos/PLANO.md, seção 5).
 
 Fontes: IBGE, INEP, MDS e Atlas DH (via Ipeadata), Comex Stat (ver outputs/pendencias.md). Indicadores:
 - anuais (painel_amc_anual): população, PIB per capita real, participações do VAB (agro, indústria,

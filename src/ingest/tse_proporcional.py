@@ -1,4 +1,4 @@
-"""Fase 1B — voto proporcional para deputado federal, 2006–2026 (PLANO.md, seção 1A).
+"""Fase 1B — voto proporcional para deputado federal, 2006–2026 (docs/planos/PLANO.md, seção 1A).
 
 Fontes (TSE, Dados Abertos, CDN, arquivos <conjunto>_<ano>_BRASIL.csv, CD_CARGO = 6, 1º turno):
 - votacao_partido_munzona: votos nominais e de legenda por partido.

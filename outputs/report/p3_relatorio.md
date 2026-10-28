@@ -1,6 +1,6 @@
 # A polarização se resolve? Episódios de polarização política no mundo, 1900–2025, e a posição do Brasil
 
-*Relatório do `plano3.md`. Versão de 28/10/2026. Código em `src/p3_*.py`, tabelas em `outputs/tables/p3_*`, figuras em `outputs/figures/p3_*` (PNG 300 dpi e SVG). Decisões de dados, revisões manuais e pendências em `outputs/pendencias.md` e `data/manual/`.*
+*Relatório do `docs/planos/plano3.md`. Versão de 28/10/2026. Código em `src/p3_*.py`, tabelas em `outputs/tables/p3_*`, figuras em `outputs/figures/p3_*` (PNG 300 dpi e SVG). Decisões de dados, revisões manuais e pendências em `outputs/pendencias.md` e `data/manual/`.*
 
 > **O que se mede.** A polarização é a variável `v2cacamps` do V-Dem: especialistas respondem se a sociedade está dividida em campos políticos antagônicos, a ponto de apoiadores de campos opostos evitarem a convivência social. Não é polarização afetiva medida em indivíduos. Os desfechos foram pré-codificados a partir das bases e revisados pelo usuário em 50 episódios.
 
@@ -182,7 +182,7 @@ Desde 2022, o voto presidencial está **bipolarizado e geograficamente concentra
 
 ## Referências
 
-Conforme o `plano3.md`. Edições e páginas devem ser conferidas antes de publicação.
+Conforme o `docs/planos/plano3.md`. Edições e páginas devem ser conferidas antes de publicação.
 
 - Brinton, C. (1938). *The Anatomy of Revolution*.
 - Gramsci, A. *Cadernos do cárcere* (cesarismo).

@@ -1,4 +1,4 @@
-"""Checks da Fase 1B — voto proporcional para deputado federal (PLANO.md, seção 1A)."""
+"""Checks da Fase 1B — voto proporcional para deputado federal (docs/planos/PLANO.md, seção 1A)."""
 
 import json
 
