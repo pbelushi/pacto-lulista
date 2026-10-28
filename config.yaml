@@ -1,0 +1,73 @@
+# Parâmetros do projeto pacto-lulista (ver PLANO.md)
+
+caminhos:
+  raw: data/raw
+  interim: data/interim
+  processed: data/processed
+  figures: outputs/figures
+  tables: outputs/tables
+  report: outputs/report
+
+tse:
+  cdn: https://cdn.tse.jus.br/estatistica/sead/odsele
+  # Fallback para 2026 enquanto o CDN não tiver o 2º turno consolidado
+  portal_resultados: https://resultados.tse.jus.br/oficial
+
+anos_eleicao: [2006, 2010, 2014, 2018, 2022, 2026]
+ano_base: 2010
+ano_final: 2026
+
+# Disputas de 2º turno presidencial (números de urna = número do partido)
+presidencial:
+  2006: {pt: 13, op: 45, cand_pt: "Lula", cand_op: "Geraldo Alckmin", partido_op: PSDB}
+  2010: {pt: 13, op: 45, cand_pt: "Dilma Rousseff", cand_op: "José Serra", partido_op: PSDB}
+  2014: {pt: 13, op: 45, cand_pt: "Dilma Rousseff", cand_op: "Aécio Neves", partido_op: PSDB}
+  2018: {pt: 13, op: 17, cand_pt: "Fernando Haddad", cand_op: "Jair Bolsonaro", partido_op: PSL}
+  2022: {pt: 13, op: 22, cand_pt: "Lula", cand_op: "Jair Bolsonaro", partido_op: PL}
+  2026: {pt: 13, op: 22, cand_pt: "Lula", cand_op: "Flávio Bolsonaro", partido_op: PL}
+
+# Partido antipetista de referência para a Câmara (seção 1A)
+partido_anti:
+  2006: 45
+  2010: 45
+  2014: 45
+  2018: 17
+  2022: 22
+  2026: 22
+
+# Municípios instalados após 2010: código IBGE do novo -> código IBGE do município-mãe (AMC)
+amc:
+  1504752: 1506807  # Mojuí dos Campos/PA -> Santarém/PA
+  4212650: 4209409  # Pescaria Brava/SC -> Laguna/SC
+  4220000: 4207007  # Balneário Rincão/SC -> Içara/SC
+  4314548: 4302105  # Pinto Bandeira/RS -> Bento Gonçalves/RS
+  5006275: 5003256  # Paraíso das Águas/MS -> Costa Rica/MS (também desmembrado de Água Clara e Chapadão do Sul)
+  # Instalado em 2025 (vota pela 1ª vez em 2026, se o TSE já o tratar separadamente)
+  5101837: 5107925  # Boa Esperança do Norte/MT -> Sorriso/MT (também desmembrado de Nova Ubiratã)
+
+grupos:
+  limiar_dp: 1.0          # G_PT/G_OP: swing >= +1 DP / <= -1 DP
+  limiar_margem_pp: 5.0   # "destacou-se" na proporcional
+  percentil_destaque: 80
+  k_clusters: [3, 4, 5, 6]
+  # k escolhido por silhueta + interpretabilidade (Fase 2; ver outputs/tables/fase2_silhueta.md).
+  # forma: k=4 tem silhueta praticamente igual a k=3 (0,286 vs 0,289) e separa padrões distintos.
+  k_escolhido: {nivel: 3, forma: 4}
+  # Rótulos interpretativos, definidos após inspecionar os centróides (fase2_centroides_clusters.md).
+  # Mudam se os dados ou a semente mudarem: conferir ao reprocessar.
+  rotulos_cluster:
+    nivel: {1: "PT forte", 2: "intermediário", 3: "PT fraco"}
+    forma: {1: "ganho até 2018, recuo parcial", 2: "antipetista estável", 3: "petista em declínio desde 2018", 4: "erosão contínua"}
+
+checks:
+  tolerancia_pp: 0.01
+
+# Alinhamento temporal das covariáveis (PLANO.md, seção 3)
+alinhamento:
+  # indicadores anuais: último ano disponível <= eleição − defasagem
+  defasagem_anual: 1
+  # população: ano da própria eleição
+  defasagem_pop: 0
+  # Censo de referência por eleição. 2018: sem valor nas colunas principais (só *_interp, para descritivas).
+  # 2006: não há Censo 2000 de raça/religião ingerido; usa 2010 (posterior à eleição), marcado em ano_ref_censo.
+  censo: {2006: 2010, 2010: 2010, 2014: 2010, 2018: null, 2022: 2022, 2026: 2022}
