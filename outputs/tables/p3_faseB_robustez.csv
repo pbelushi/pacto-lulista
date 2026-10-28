@@ -1,0 +1,7 @@
+variante,limiar,episodios,paises,duracao_mediana,pct_15_anos_ou_mais,termino_ruptura,termino_despolarização,termino_em curso,termino_fim da série,referencias_capturadas
+"principal (p80, mín. 3)",1.093,271,95,6.0,17.712177121771216,159,80,32,0,9
+limiar p75,0.901,332,108,6.0,17.46987951807229,204,86,42,0,9
+limiar p90,1.684,150,72,5.0,12.0,79,53,18,0,8
+duração mínima 2,1.093,341,102,5.0,14.076246334310852,199,101,41,0,9
+duração mínima 5,1.093,183,86,9.0,26.229508196721312,103,57,23,0,6
+"v2smpolsoc (2000–2025, p80)",1.11,94,66,6.5,15.957446808510639,33,29,32,0,3

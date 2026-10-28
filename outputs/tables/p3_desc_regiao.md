@@ -1,0 +1,13 @@
+| regiao                              |   C |   D |   P |   R1 |   R2 |   total |
+|:------------------------------------|----:|----:|----:|-----:|-----:|--------:|
+| América Latina e Caribe             |   7 |  12 |   8 |   49 |   15 |      91 |
+| Europa Ocidental e América do Norte |   1 |   3 |   5 |   10 |    1 |      20 |
+| Europa Oriental e Ásia Central      |   7 |  11 |  10 |   20 |    2 |      50 |
+| Oriente Médio e Norte da África     |   5 |   7 |   1 |    8 |    2 |      23 |
+| África Subsaariana                  |   9 |  14 |   5 |   15 |    9 |      52 |
+| Ásia e Pacífico                     |   3 |   6 |   7 |   13 |    4 |      33 |
+| total                               |  32 |  53 |  36 |  115 |   33 |     269 |
+
+Episódios por região (V-Dem, 6 regiões) e desfecho final.
+
+Fonte: V-Dem v16 (v2cacamps e demais), ERT v16, UCDP/PRIO 25.1, Archigos 4.1; códigos de desfecho revisados pelo usuário. Elaboração própria.

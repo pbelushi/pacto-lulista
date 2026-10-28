@@ -247,3 +247,65 @@
 - Relatório `outputs/report/pacto20.md` com vereditos por critério; figuras `pacto20_mapas_capitais`, `pacto20_betas`, `pacto20_tercis`, `pacto20_mobilizacao` (`src/pacto20_saidas.py`).
 - **PyEI:** às 00h40 de 28/10/2026, depois de 3h40 de amostragem, ainda não havia terminado São Paulo; o relatório usa a regressão de Goodman. Se o PyEI terminar, comparar com `pacto20_faseC_c4_goodman`.
 - **Validador de paleta** do skill de visualização exige Node, ausente nesta máquina; as figuras com séries por ano usam também marcador e legenda (cor não é a única pista) e seguem a convenção de cores do projeto (`src/mapas.py`).
+
+## Plano3 (polarização comparada) — Fase A: dados (28/10/2026)
+
+- **V-Dem Country-Year v16 (Full+Others)** e **ERT v16**: baixados dos repositórios oficiais `vdeminstitute/vdemdata` (commit f4dd269, 17/03/2026) e `vdeminstitute/ERT` (commit 7fd51ce, 31/03/2026); versões em `data/raw/p3/versoes.json`. O site v-dem.net não responde desta rede (falha de TLS). Cobertura 1789–2025; o painel usa 1900–2025 (início de `v2cacamps`).
+- **UCDP/PRIO Armed Conflict Dataset v25.1** (1946–2024) e **Archigos 4.1** (1875–2015): baixados das fontes oficiais.
+- **Powell e Thyne (golpes): indisponível.** uky.edu responde 403 a download automático (não contornado). **Alternativa adotada:** `e_pt_coup` e `e_pt_coup_attempts` do V-Dem (mesma fonte, mas país-ano, sem data exata), 1950–2025; antes de 1950, `e_coups` (1789–2008). Cobertura de golpes antes de 1950 é parcial (35–50% dos país-anos).
+- **Correlates of War (guerras intraestatais): indisponível** (correlatesofwar.org falha no TLS). **Alternativa:** `e_civil_war` do V-Dem (≥ 1.000 mortes em combate, 1816–2006; fonte COW via V-Dem) e UCDP para 2007–2024.
+- **França 1789–1799:** fora da cobertura de `v2cacamps` (começa em 1900). Fica só como ilustração no relatório.
+- **PIB:** `e_gdppc` do V-Dem termina em 2019; crescimento sem dado para 2020–2025. Se necessário, complementar com Maddison Project (a verificar).
+- **Archigos** termina em 2015: entradas irregulares depois disso só via golpes do V-Dem e ERT.
+- **Escolhas de variáveis (codebook v16):** militares = `v2x_ex_military` (nomeação e destituição do Executivo por força militar); presidencialismo = chefe de Estado eleito diretamente e acumulando a chefia de governo (`v2ex_elechos`, `v2exhoshog`).
+- **Questão de desenho para a Fase B:** em vários casos a polarização medida continua alta depois da ruptura (Brasil: `v2cacamps_ord` = 4 de 1960 a 1983). Com a regra "fim = segundo ano abaixo do limiar", o golpe de 1964 cairia no meio do episódio, não no desfecho.
+
+## Plano3 — Fase B: episódios (28/10/2026)
+
+- **Ruptura encerra o episódio** (decisão do usuário: no Brasil há duas rupturas, 1964 e 1984–85). Ruptura = golpe bem-sucedido, entrada irregular de líder (Archigos) ou mudança de categoria do RoW (exceto entre democracia eleitoral e liberal). Polarização alta depois da ruptura forma novo episódio.
+- **Início de guerra civil não encerra o episódio**: é fase de conflito aberto, não resolução (Espanha 1936 → 1939). Fica como atributo (anos de guerra civil, tentativas de golpe fracassadas) para o teste de H3.
+- **Só Estados independentes** (`v2svindep` = 1, Gleditsch e Ward): sem isso, períodos coloniais (Namíbia 1900–1989, Angola, Coreia sob o Japão) dominavam os episódios longos. Limiar principal = p80 entre Estados independentes, 1900–2025 = **1,093** (parte alta da categoria ordinal 3, "mais hostil que amistoso"; a categoria 4 começa em ~1,3).
+- **Casos de referência não capturados, por limitação do dado:** Rússia 1917 e Itália 1919–1922. O V-Dem só registra polarização alta no próprio ano da ruptura (Itália: 0,78 em 1920–21 e 2,72 em 1922; Rússia: 1,06 em 1916 e 2,98 em 1917), o que daria episódio de 1 ano. Não forçados, conforme o plano. França 1789–1799 fora da cobertura. Em média, o salto em torno das rupturas é pequeno (0,39 em t−1 contra 0,43 em t), mas nesses casos é grande: sinal do viés retrospectivo citado no plano.
+- **Brasil:** 1960–1964 (termina no golpe de 1964) e 2016–2025 (em curso); com o limiar de Estados independentes, 1956–1959 fica abaixo de 1,093. O período 1970–1984 sob a ditadura termina por despolarização em 1984, com mudança de regime em 1985 dentro da janela de 2 anos.
+
+## Plano3 — Fase C: pré-codificação (28/10/2026) — AGUARDANDO REVISÃO DO USUÁRIO
+
+- Pré-código automático (`src/p3_codificacao.py`): R1 108, R2 34, P 42, D 55, C 32. Todas as rupturas e pactos (184) estão marcados `revisar = sim`; lista em `outputs/report/p3_casos_para_revisao.md`, com o Brasil e os casos de referência no topo.
+- Regras usam só as bases: direção da mudança de regime (RoW), nome e forma de acesso do chefe de Estado no ano da ruptura (`v2exnamhos`, `v2expathhs`), partido (`v2exparhos`; "technical" e "independent" = sem partido), dimensão militar, golpes e entradas irregulares. Nenhum fato completado de memória.
+- **Limite conhecido do pré-código:** golpe militar seguido de chefe apartidário vira R2 por regra, mas pode ser R1 quando os militares agem por um dos polos (ex.: Chile 1973). Democratização sem golpe vira P, mas pode ser ruptura por mobilização (R1). É exatamente o que a revisão manual deve decidir.
+- Conflito prévio (H3) em duas versões: estrita (guerra civil ou tentativa de golpe fracassada; 95 episódios) e ampla (inclui violência política frequente, `v2caviol_ord` >= 3; 198 episódios).
+
+## Plano3 — Fase C: revisão do usuário aplicada (28/10/2026)
+
+- O usuário revisou 50 episódios (Brasil, Colômbia, El Salvador, Polônia, México, Mianmar, Rússia, África do Sul, Albânia, Iêmen). Regra: código final = `codigo_final` do usuário; em branco, vale o `codigo_proposto`.
+- **Incidente:** o CSV editado no Excel tinha codificação mista e, ao tentar copiá-lo, a cópia falhou e o script da Fase C rodou em seguida, sobrescrevendo `outputs/tables/p3_codificacao.csv`. A revisão foi **reconstruída** a partir da leitura feita antes (as 50 linhas com id, código e comentário tinham sido impressas na sessão; a soma por código confere: R1 25, R2 8, P 6, D 4, C 7). O comentário de MEX-1921 já estava truncado no arquivo original ("cão Mexicana").
+- A revisão agora fica em `data/manual/p3_revisao_usuario.csv` (UTF-8 com BOM, abre certo no Excel), que nenhum script sobrescreve; `src/p3_codificacao.py` reaplica os códigos por id a cada execução.
+- Códigos finais: R1 117, R2 33, P 36, D 53, C 32. Mudanças da revisão: 11 P → R1, 9 R2 → R1, 8 R1 → R2, 5 R1 → P, 2 D → R1 (Rússia 1903 e 1919).
+
+## Plano3 — Fase D: análise (28/10/2026)
+
+- **Fine-Gray indisponível** na `lifelines` (instalada, v0.30.3): usado Cox por causa (EP agrupado por país, penalização L2 de 0,01) e incidência acumulada não paramétrica. As probabilidades do Brasil combinam os Cox por causa em incidência acumulada, condicionadas aos 10 anos já transcorridos, com IC por bootstrap de países (200 réplicas).
+- **Aalen-Johansen:** a `AalenJohansenFitter` da lifelines desempata durações iguais com ruído aleatório; como as durações são anos inteiros, foi implementada a versão em tempo discreto (exata com empates). Confere com o Kaplan-Meier (fração em curso idêntica).
+- **N pequeno onde importa:** só 32 episódios começam em democracia (22 encerrados); R2 tem 33 eventos e P, 36. Tabelas reportam eventos ao lado das razões de risco.
+- **Robustez das definições alternativas:** os desfechos dos episódios das variantes vêm do pré-código, substituído pelo código final revisado quando o episódio termina no mesmo país com até 1 ano de diferença.
+- Validador de paleta indisponível (sem Node): cores dos desfechos com legenda e rótulo em todas as figuras.
+
+## Plano3 — recorte democrático e exclusões (28/10/2026)
+
+- **Excluídos por decisão do usuário** (desfecho por invasão externa, não pela dinâmica interna): França 1934–1940 e Ucrânia 2020–2022. Lista em `data/manual/p3_exclusoes.csv`, aplicada em toda a Fase D e nas variantes de robustez. Total: 269 episódios.
+- **Recorte democrático** (`p3_dem_*`): 30 episódios iniciados em democracia (RoW 2 ou 3; `v2x_polyarchy` >= 0,5 seleciona os mesmos), 20 encerrados, 10 em curso; 22 começaram desde 2005.
+- Tipo de ruptura classificado só pelo evento ("golpe ou entrada irregular" × "autocratização sem golpe"), sem atribuir autoria: o chefe de Estado do V-Dem nem sempre é quem governa (Índia, Geórgia, Hungria são parlamentaristas).
+- Viés retrospectivo: em 4 das 11 rupturas democráticas o pico de polarização cai no ano da ruptura; o pico calculado sem o último ano continua separando ruptura de não ruptura (2,0 × 1,56; Mann-Whitney p = 0,006).
+
+## Plano3 — Fase E: indicadores brasileiros (28/10/2026)
+
+- **1989 indisponível:** `detalhe_votacao_munzona_1989` e `votacao_candidato_munzona_1989` dão HTTP 404 no CDN do TSE. Série 1994–2026; 1989 não foi completado de memória.
+- **Colunas de votos do TSE:** em 1998 só `QT_VOTOS_NOMINAIS_VALIDOS` está preenchida (`QT_VOTOS_NOMINAIS` = 0); em 2002–2006 é o contrário. Usa-se o maior valor da linha.
+- **2026, 2º turno:** do painel do projeto (Portal Resultados), como no resto do projeto.
+- **AMCs em 1994 e 1998:** municípios criados em 1997 e 2001 ainda não existiam; ficam sem dado nesses anos (5.020 e 5.510 AMCs com dado, contra 5.563 depois).
+- **Quebras estruturais a ler com cautela:** a queda de brancos e nulos de 1998 para 2002 coincide com a urna eletrônica em todo o país (2000), que reduziu o voto nulo por erro; o R² baixo até 2002 usa estrutura social de 2010 (anacrônica para os anos 1990).
+- **Correção do usuário (28/10/2026):** ESP-1933 (ruptura de 1936) passa a "golpe ou entrada irregular" (levante militar que abriu a guerra civil, resolvida em 1939), em `data/manual/p3_subtipos_usuario.csv`; o código continua R1. Recorte democrático: 3 rupturas por golpe e 8 por autocratização sem golpe.
+
+## Plano3 — libertações da Segunda Guerra mantidas (28/10/2026)
+
+- **Decisão do usuário:** as libertações de 1944–45 (França 1941–1945, Luxemburgo 1941–1944, Noruega 1943–1945, codificadas como pacto) **não** são excluídas. Foram promovidas também por agentes internos (Resistência francesa) junto com os Aliados; o mesmo vale para Iugoslávia e Grécia com os partisans (SRB-1942 e GRC-1937, vitória de um polo). Só França 1940 e Ucrânia 2022 (desfecho de invasão) ficam excluídos.

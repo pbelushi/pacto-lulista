@@ -1,0 +1,24 @@
+medida,valor
+episódios,30.0
+encerrados,20.0
+em curso (2025),10.0
+% dos encerrados: R1 ruptura vencida por um polo,50.0
+% dos encerrados: R2 cesarismo,5.0
+% dos encerrados: P pacto,5.0
+% dos encerrados: D despolarização sem ruptura,40.0
+rupturas: golpe ou entrada irregular,3.0
+rupturas: autocratização sem golpe,8.0
+rupturas: outra mudança de regime,0.0
+rupturas com pico de polarização no último ano do episódio (viés retrospectivo?),4.0
+não rupturas com pico no último ano do episódio,1.0
+"duração mediana (Kaplan-Meier, anos)",12.0
+% ainda em curso após 5 anos (KM),73.33333333333334
+% ainda em curso após 10 anos (KM),51.78600823045269
+% ainda em curso após 15 anos (KM),28.770004572473706
+% ainda em curso após 20 anos (KM),19.180003048315804
+incidência acumulada em 15 anos: R1 ruptura vencida por um polo,40.38957475994513
+incidência acumulada em 15 anos: R2 cesarismo,3.3333333333333335
+incidência acumulada em 15 anos: P pacto,4.0740740740740735
+incidência acumulada em 15 anos: D despolarização sem ruptura,23.433013260173755
+encerrados que começaram antes de 1945,3.0
+episódios iniciados desde 2005,22.0

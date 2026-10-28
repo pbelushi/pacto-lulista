@@ -1,0 +1,13 @@
+caso,"principal (p80, mín. 3)",limiar p75,limiar p90,duração mínima 2,duração mínima 5,"v2smpolsoc (2000–2025, p80)"
+Rússia 1917,False,False,False,False,False,False
+França 1789–1799,False,False,False,False,False,False
+Itália 1919–1922,False,False,False,False,False,False
+Alemanha 1919–1933,True,True,True,True,True,False
+Espanha 1931–1936,True,True,True,True,False,False
+Chile 1970–1973,True,True,True,True,False,False
+Argentina 1945–1976,True,True,True,True,False,False
+Colômbia 1946–1958,True,True,True,True,True,False
+Brasil 1954–1964,True,True,True,True,True,False
+Venezuela pós-1999,True,True,True,True,True,True
+EUA pós-1990,True,True,False,True,True,True
+Brasil pós-2014,True,True,True,True,True,True
