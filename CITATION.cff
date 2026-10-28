@@ -3,6 +3,7 @@ message: "Se usar este código ou estes resultados, cite a versão arquivada no 
 title: "O pacto lulista mudou de perfil? Painel municipal, locais de votação e episódios de polarização comparados (Brasil, 1994–2026; mundo, 1900–2025)"
 type: software
 version: 1.0.0
+doi: "10.5281/zenodo.23735410"
 date-released: 2026-10-28
 license: MIT
 repository-code: "https://github.com/pbelushi/pacto-lulista"

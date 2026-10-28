@@ -1,5 +1,7 @@
 # O pacto lulista mudou de perfil?
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23735410.svg)](https://doi.org/10.5281/zenodo.23735410)
+
 Três estudos empíricos, com código e resultados replicáveis, sobre a base eleitoral do PT e a polarização no Brasil:
 
 | Estudo | Pergunta | Unidade e período | Relatório |
@@ -114,4 +116,8 @@ Cada relatório detalha suas limitações.
 
 ## Citação e licença
 
-Código e textos sob licença MIT (ver `LICENSE`). Para citar, use os metadados de `CITATION.cff` ou o DOI da versão no Zenodo.
+Código e textos sob licença MIT (ver `LICENSE`). Para citar:
+
+> Silva, Paulo Roberto (2026). *O pacto lulista mudou de perfil? Painel municipal, locais de votação e episódios de polarização comparados (Brasil, 1994–2026; mundo, 1900–2025)*, versão 1.0.0. Zenodo. https://doi.org/10.5281/zenodo.23735410
+
+Os metadados completos estão em `CITATION.cff`.
