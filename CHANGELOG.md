@@ -1,5 +1,9 @@
 # Histórico de versões
 
+## Não lançado
+
+- **Estudo 3, extra:** análise fatorial exploratória das variáveis do V-Dem ligadas à polarização (`src/p3_afe.py`, etapa 3.08; nota em `outputs/report/p3_afe.md`). Nova dependência: `factor_analyzer`.
+
 ## 1.0.0 — 28/10/2026
 
 Primeira versão pública, para arquivamento no Zenodo.

@@ -25,5 +25,6 @@ esda==2.10.0
 spreg==1.9.1
 pyfixest==0.60.0
 lifelines==0.30.3
+factor_analyzer==0.5.1
 pyreadr==0.5.8
 pytest==9.1.1

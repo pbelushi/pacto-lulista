@@ -8,7 +8,7 @@ Três estudos empíricos, com código e resultados replicáveis, sobre a base el
 |---|---|---|---|
 | **1. Pacto lulista** | A base territorial do voto petista no 2º turno (municípios pobres, nordestinos, dependentes de transferências) se manteve, se deslocou ou se dissolveu? | 5.565 AMCs, eleições de 2006 a 2026 | [`outputs/report/relatorio.md`](outputs/report/relatorio.md) e [`extra_coortes.md`](outputs/report/extra_coortes.md) |
 | **2. Pacto lulista 2.0** | Dentro das mesmas cidades, os locais de votação mais jovens e mais negros passaram a votar mais no PT, líquido de renda? | ~80 mil locais de votação, 2018–2026 (placebo 2010–2014) | [`outputs/report/pacto20.md`](outputs/report/pacto20.md) |
-| **3. A polarização se resolve?** | Episódios de polarização intensa terminam por conflito, cesarismo, pacto ou despolarização? Onde está o Brasil? | 269 episódios em 95 países, 1900–2025; Brasil 1994–2026 | [`outputs/report/p3_relatorio.md`](outputs/report/p3_relatorio.md) |
+| **3. A polarização se resolve?** | Episódios de polarização intensa terminam por conflito, cesarismo, pacto ou despolarização? Onde está o Brasil? | 269 episódios em 95 países, 1900–2025; Brasil 1994–2026 | [`outputs/report/p3_relatorio.md`](outputs/report/p3_relatorio.md) e [`p3_afe.md`](outputs/report/p3_afe.md) |
 
 Os planos de pesquisa que guiaram cada estudo estão em [`docs/planos/`](docs/planos/). As decisões de dados (fontes indisponíveis, alternativas adotadas, correções) estão registradas, em ordem cronológica, em [`outputs/pendencias.md`](outputs/pendencias.md).
 
@@ -57,7 +57,7 @@ python -m pip install -r requirements.txt
 **Execução.** Um comando refaz tudo, das descargas às figuras:
 
 ```bash
-python -m src.pipeline --listar           # as 46 etapas, com o comando de cada uma
+python -m src.pipeline --listar           # as 47 etapas, com o comando de cada uma
 python -m src.pipeline --testes           # tudo + pytest ao fim
 python -m src.pipeline --estudo 3         # só um estudo (o 2 e o 3 usam o painel e a malha do estudo 1)
 python -m src.pipeline --sem-rede         # sem downloads, com data/raw/ já preenchido

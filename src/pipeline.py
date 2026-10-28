@@ -97,6 +97,8 @@ ETAPAS = [
     Etapa("3.06", "Fase E: TSE 1994–2002", "src.ingest.tse_download",
           ["detalhe_votacao_munzona", "votacao_candidato_munzona", "1994", "1998", "2002"], rede=True),
     Etapa("3.07", "Fase E: indicadores brasileiros 1994–2026", "src.p3_brasil", nota="~5 min"),
+    Etapa("3.08", "Extra: análise fatorial exploratória das variáveis de polarização do V-Dem", "src.p3_afe",
+          nota="~5 min"),
 ]
 
 
