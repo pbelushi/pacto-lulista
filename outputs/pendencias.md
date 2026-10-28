@@ -241,3 +241,9 @@
 - **Estimativa ecológica reprovada na validação:** Δcomparecimento do local ~ fração de mulheres no eleitorado (EF de município) erra o sinal onde há dado direto. Em 2018, estimou +1,7 p.p. para mulheres − homens contra −0,7 real; em 2022, +2,7 contra −0,5 real (com controles de idade e escolaridade, +3,8 e +3,7). O % de mulheres varia pouco entre locais (metade entre 49% e 54%) e carrega o tipo de local ou bairro. **A estimativa de 2026 (+5,1 p.p.; +6,9 com controles) não deve ser lida como número.**
 - **Indício, não estimativa:** o coeficiente de 2026 é cerca de 2 p.p. maior que o de 2018 e o de 2022. Se o viés do método for o mesmo nos três anos (hipótese não testável), sobram cerca de +1,8 a +2,7 p.p. a favor das mulheres na variação entre turnos de 2026. Serve como sinal de que a mobilização do 2º turno pode ter sido mais feminina; confirmar com o arquivo do TSE.
 - Tabelas: `pacto20_extra_sexo_comparecimento` (dado direto) e `pacto20_extra_sexo_ecologico` (estimativa × verdade).
+
+## Pacto 2.0 — Fase E: saídas (28/10/2026)
+
+- Relatório `outputs/report/pacto20.md` com vereditos por critério; figuras `pacto20_mapas_capitais`, `pacto20_betas`, `pacto20_tercis`, `pacto20_mobilizacao` (`src/pacto20_saidas.py`).
+- **PyEI:** às 00h40 de 28/10/2026, depois de 3h40 de amostragem, ainda não havia terminado São Paulo; o relatório usa a regressão de Goodman. Se o PyEI terminar, comparar com `pacto20_faseC_c4_goodman`.
+- **Validador de paleta** do skill de visualização exige Node, ausente nesta máquina; as figuras com séries por ano usam também marcador e legenda (cor não é a única pista) e seguem a convenção de cores do projeto (`src/mapas.py`).
