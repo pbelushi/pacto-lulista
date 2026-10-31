@@ -3,7 +3,8 @@
 Entradas: data/interim/*.parquet das Fases 1, 1B e 3 e data/processed/grupos_*.parquet da Fase 2.
 Fontes incluídas: IBGE (população, Censos, PIB), INEP (Ideb), MDS via Ipeadata (beneficiários do Bolsa
 Família), Comex Stat (comércio exterior) e Atlas DH via Ipeadata (IDHM 2010, só como nível inicial).
-Fora (ver outputs/pendencias.md): DATASUS, % de cadastrados no CadÚnico, RAIS, IDHM pós-2010.
+Fora (ver outputs/pendencias.md): % de cadastrados no CadÚnico, RAIS, IDHM pós-2010. Do DATASUS entram as taxas de
+homicídio, intervenção legal e mortalidade infantil, se data/interim/sim.parquet existir.
 
 Saídas:
 - data/processed/painel_municipal.parquet: município × ano (2000–2026), indicadores como ingeridos.
@@ -32,6 +33,7 @@ import logging
 import numpy as np
 import pandas as pd
 
+from src.ingest.datasus import bayes_empirico
 from src.ingest.tse import tse_para_amc
 from src.ingest.tse_portal import pasta as pasta_portal
 from src.utils import caminho, config
@@ -53,9 +55,12 @@ ANUAIS = {
     "pbf": (["pbf_100hab", "valor_pbf_pc_real"], "pbf_100hab"),
     "comex": (["export_pc_real", "log_export_commod_pc", "saldo_pc_real", "pct_commodities", "hhi_exp"],
               "export_pc_real"),
+    "sim": (["tx_homicidio_trienal", "tx_homicidio_trienal_eb", "tx_intervencao_legal_trienal", "tmi_trienal",
+             "tmi_trienal_eb"], "tx_homicidio_trienal"),
 }
 IDHM = ["idhm", "idhm_e", "idhm_l", "idhm_r"]
 COMEX_SOMAS = ["exportacao_real_brl", "exp_commod_real_brl", "importacao_real_brl", "saldo_real_brl"]
+SIM_SOMAS = ["obitos_total", "obitos_infantis", "homicidios", "mortes_intervencao_legal", "obitos_covid"]
 
 
 def _amc_map() -> pd.Series:
@@ -76,6 +81,18 @@ def painel_municipal() -> pd.DataFrame:
     df = pop
     for outro in [pib, cen, ide, pbf, idh, cx]:
         df = df.merge(outro, on=["id_municipio", "ano"], how="outer")
+    # microdados do SIM (fora do git): sem eles o painel sai sem as colunas de mortalidade
+    if (i / "sim.parquet").exists():
+        sim = pd.read_parquet(i / "sim.parquet")
+        df = df.merge(sim.loc[sim["ano_completo"], ["id_municipio", "ano"] + SIM_SOMAS], on=["id_municipio", "ano"],
+                      how="left")
+        nv = pd.read_parquet(i / "sinasc.parquet")
+        cs = config()["sim"]
+        nv = nv[(nv["ano"] <= cs["ultimo_ano_completo"]) & ~nv["ano"].isin(cs["nv_anos_truncados"])]
+        df = df.merge(nv, on=["id_municipio", "ano"], how="left")
+        # município sem nascimento no ano = 0, nos anos do SIM com SINASC íntegro
+        sem_dado = df["obitos_total"].isna() | df["ano"].isin(cs["nv_anos_truncados"])
+        df["nascidos_vivos"] = df["nascidos_vivos"].where(sem_dado, df["nascidos_vivos"].fillna(0))
     df["id_amc"] = df["id_municipio"].map(_amc_map())
     return df.sort_values(["id_municipio", "ano"]).reset_index(drop=True)
 
@@ -116,7 +133,27 @@ def painel_amc_anual(mun: pd.DataFrame) -> pd.DataFrame:
     out["export_pc_real"] = out["exportacao_real_brl"] / out["pop"]
     out["saldo_pc_real"] = out["saldo_real_brl"] / out["pop"]
     out["log_export_commod_pc"] = np.log1p(out["exp_commod_real_brl"] / out["pop"])
+    if "homicidios" in mun:
+        out = out.join(_taxas_sim(g[SIM_SOMAS + ["nascidos_vivos"]].sum(min_count=1), out["pop"]))
     return out.reset_index()
+
+
+def _taxas_sim(s: pd.DataFrame, pop: pd.Series) -> pd.DataFrame:
+    """Janela trienal t−2…t, só com anos completos; suavização Bayesiana empírica por ano."""
+    s = s.join(pop).sort_index()
+    tri = s.groupby("id_amc").transform(lambda c: c.rolling(3, min_periods=3).sum())
+    tri["pop"] = tri["pop"].where(tri["homicidios"].notna())
+    s["tx_homicidio_trienal"] = 1e5 * tri["homicidios"] / tri["pop"]
+    s["tx_intervencao_legal_trienal"] = 1e5 * tri["mortes_intervencao_legal"] / tri["pop"]
+    s["tmi_trienal"] = 1000 * tri["obitos_infantis"] / tri["nascidos_vivos"]
+    s["tx_homicidio_trienal_eb"], s["tmi_trienal_eb"] = np.nan, np.nan
+    for _, idx in s.groupby("ano").groups.items():
+        if tri.loc[idx, "homicidios"].notna().any():
+            t = tri.loc[idx]
+            s.loc[idx, "tx_homicidio_trienal_eb"] = 1e5 * bayes_empirico(t["homicidios"], t["pop"])
+            if t["nascidos_vivos"].notna().any():
+                s.loc[idx, "tmi_trienal_eb"] = 1000 * bayes_empirico(t["obitos_infantis"], t["nascidos_vivos"])
+    return s.drop(columns="pop")
 
 
 def _ultimo_ate(amc: pd.DataFrame, cols: list[str], chave: str, limite: int) -> pd.DataFrame:
@@ -133,6 +170,8 @@ def covariaveis_eleicao(amc: pd.DataFrame) -> pd.DataFrame:
     for t in cfg["anos_eleicao"]:
         base = amc[amc["ano"] == t - al["defasagem_pop"]].set_index("id_amc")[["pop"]]
         for nome, (cols, chave) in ANUAIS.items():
+            if chave not in amc:
+                continue
             u = _ultimo_ate(amc, cols, chave, t - al["defasagem_anual"])
             base = base.join(u.rename(columns={"ano_ref": f"ano_ref_{nome}"}))
         ref = al["censo"][t]
@@ -258,6 +297,12 @@ DESCRICOES = {
     "pct_commodities": ("% commodities (SH 01–27) nas exportações; NaN se não exporta", "Comex Stat", "%"),
     "hhi_exp": ("Concentração da pauta exportadora (HHI sobre SH4); NaN se não exporta", "Comex Stat", "0–1"),
     "ano_ref_pbf": ("Ano (dezembro) do Bolsa Família usado", "—", "ano"),
+    "ano_ref_sim": ("Último ano da janela trienal do SIM usada (2024 na eleição de 2026)", "—", "ano"),
+    "tx_homicidio_trienal": ("Homicídios (X85–Y09) por 100 mil hab., residência, média de 3 anos", "DATASUS SIM", "taxa"),
+    "tx_homicidio_trienal_eb": ("Idem, com suavização Bayesiana empírica", "DATASUS SIM", "taxa"),
+    "tx_intervencao_legal_trienal": ("Mortes por intervenção legal (Y35–Y36) por 100 mil hab., média de 3 anos", "DATASUS SIM", "taxa"),
+    "tmi_trienal": ("Óbitos de menores de 1 ano por mil nascidos vivos, residência, janela de 3 anos", "DATASUS SIM e SINASC", "taxa"),
+    "tmi_trienal_eb": ("Idem, com suavização Bayesiana empírica", "DATASUS SIM e SINASC", "taxa"),
     "ano_ref_comex": ("Ano do Comex usado", "—", "ano"),
     "idhm_2010": ("IDHM 2010 (fixo por AMC; nível inicial)", "Atlas DH (PNUD/Ipea/FJP) via Ipeadata", "0–1"),
     "idhm_e_2010": ("IDHM Educação 2010", "Atlas DH via Ipeadata", "0–1"),

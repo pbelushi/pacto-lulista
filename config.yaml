@@ -3,6 +3,7 @@
 caminhos:
   raw: data/raw
   interim: data/interim
+  manual: data/manual
   processed: data/processed
   figures: outputs/figures
   tables: outputs/tables
@@ -71,3 +72,11 @@ alinhamento:
   # Censo de referência por eleição. 2018: sem valor nas colunas principais (só *_interp, para descritivas).
   # 2006: não há Censo 2000 de raça/religião ingerido; usa 2010 (posterior à eleição), marcado em ano_ref_censo.
   censo: {2006: 2010, 2010: 2010, 2014: 2010, 2018: null, 2022: 2022, 2026: 2022}
+
+sim:
+  # microdados em data/manual/Mortalidade_Geral_<ano>_csv.zip. 2025 é preliminar (janeiro a setembro) e 2026 é
+  # segunda prévia (janeiro a agosto): ficam fora das taxas anuais
+  ultimo_ano_completo: 2024
+  base_excesso: [2015, 2019]
+  # DNBR2015.csv termina no meio de um registro: faltam ~230 mil nascimentos, quase todo AP, AC, RO, RR e AM
+  nv_anos_truncados: [2015]

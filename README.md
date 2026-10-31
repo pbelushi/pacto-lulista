@@ -6,8 +6,8 @@ Três estudos empíricos, com código e resultados replicáveis, sobre a base el
 
 | Estudo | Pergunta | Unidade e período | Relatório |
 |---|---|---|---|
-| **1. Pacto lulista** | A base territorial do voto petista no 2º turno (municípios pobres, nordestinos, dependentes de transferências) se manteve, se deslocou ou se dissolveu? | 5.565 AMCs, eleições de 2006 a 2026 | [`outputs/report/relatorio.md`](outputs/report/relatorio.md) e [`extra_coortes.md`](outputs/report/extra_coortes.md) |
-| **2. Pacto lulista 2.0** | Dentro das mesmas cidades, os locais de votação mais jovens e mais negros passaram a votar mais no PT, líquido de renda? | ~80 mil locais de votação, 2018–2026 (placebo 2010–2014) | [`outputs/report/pacto20.md`](outputs/report/pacto20.md) |
+| **1. Pacto lulista** | A base territorial do voto petista no 2º turno (municípios pobres, nordestinos, dependentes de transferências) se manteve, se deslocou ou se dissolveu? | 5.565 AMCs, eleições de 2006 a 2026 | [`outputs/report/relatorio.md`](outputs/report/relatorio.md), [`extra_coortes.md`](outputs/report/extra_coortes.md) e [`extra_mortalidade.md`](outputs/report/extra_mortalidade.md) |
+| **2. Pacto lulista 2.0** | Dentro das mesmas cidades, os locais de votação mais jovens e mais negros passaram a votar mais no PT, líquido de renda? | ~80 mil locais de votação, 2018–2026 (placebo 2010–2014) | [`outputs/report/pacto20.md`](outputs/report/pacto20.md) e [`extra_entre_turnos.md`](outputs/report/extra_entre_turnos.md) |
 | **3. A polarização se resolve?** | Episódios de polarização intensa terminam por conflito, cesarismo, pacto ou despolarização? Onde está o Brasil? | 269 episódios em 95 países, 1900–2025; Brasil 1994–2026 | [`outputs/report/p3_relatorio.md`](outputs/report/p3_relatorio.md) e [`p3_afe.md`](outputs/report/p3_afe.md) |
 
 Os planos de pesquisa que guiaram cada estudo estão em [`docs/planos/`](docs/planos/). As decisões de dados (fontes indisponíveis, alternativas adotadas, correções) estão registradas, em ordem cronológica, em [`outputs/pendencias.md`](outputs/pendencias.md).
@@ -57,7 +57,7 @@ python -m pip install -r requirements.txt
 **Execução.** Um comando refaz tudo, das descargas às figuras:
 
 ```bash
-python -m src.pipeline --listar           # as 49 etapas, com o comando de cada uma
+python -m src.pipeline --listar           # as 51 etapas, com o comando de cada uma
 python -m src.pipeline --testes           # tudo + pytest ao fim
 python -m src.pipeline --estudo 3         # só um estudo (o 2 e o 3 usam o painel e a malha do estudo 1)
 python -m src.pipeline --sem-rede         # sem downloads, com data/raw/ já preenchido
@@ -65,7 +65,7 @@ python -m src.pipeline --a-partir-de 2.05 # retoma de uma etapa
 python -m src.manifesto --conferir        # compara os dados baixados com os da publicação
 ```
 
-**Custo.** Cerca de 22 GB em `data/raw/` (16 GB só dos arquivos do TSE por seção; 6.670 arquivos no manifesto) e algumas horas de execução. As etapas mais longas são o entorno censitário dos locais de votação (~80 min para 2018–2026 e ~55 min para 2010–2014) e os downloads.
+**Custo.** Cerca de 22 GB em `data/raw/` (16 GB só dos arquivos do TSE por seção; 6.718 arquivos no manifesto) e algumas horas de execução. As etapas mais longas são o entorno censitário dos locais de votação (~80 min para 2018–2026 e ~55 min para 2010–2014) e os downloads.
 
 **Determinismo.** Bootstraps e permutações usam sementes fixas (no estudo 1, as do Moran global desde 31/10/2026). As fontes oficiais republicam arquivos com correções. Se `src.manifesto --conferir` acusar diferença, os resultados podem mudar marginalmente. Os arquivos usados na publicação foram baixados entre 25 e 31/10/2026 (os `*_munzona_2026` são os republicados pelo TSE em 30–31/10/2026, já com o 2º turno).
 
@@ -92,7 +92,7 @@ Todas são públicas e baixadas por script. Datas de acesso e versões estão na
 
 | Fonte | Problema | Alternativa adotada |
 |---|---|---|
-| DATASUS (TabNet) | Bloqueia acesso automatizado | Não contornado; indicadores de saúde fora do estudo 1 |
+| DATASUS (TabNet) | Bloqueia acesso automatizado | Não contornado; microdados do SIM e do SINASC baixados à mão (ver Decisões manuais). `DNBR2015` veio truncado: sem mortalidade infantil na eleição de 2018 |
 | RAIS | Indisponível | Variáveis de trabalho do Censo |
 | Powell e Thyne, site original | HTTP 403 | Mesmos dados embutidos no V-Dem |
 | Correlates of War | Falha de TLS | `e_civil_war` do V-Dem e UCDP |
@@ -105,6 +105,8 @@ O estudo 3 envolve julgamento histórico. Essas decisões ficam versionadas em `
 - `p3_revisao_usuario.csv`: códigos de desfecho revisados pelo autor (50 episódios); nos demais vale o pré-código automático das bases;
 - `p3_exclusoes.csv`: episódios excluídos por desfecho de invasão externa (França 1934–1940, Ucrânia 2020–2022);
 - `p3_subtipos_usuario.csv`: correção do tipo de ruptura onde as bases não registram o evento (Espanha 1936).
+
+Os microdados do SIM e do SINASC (`Mortalidade_Geral_<ano>_csv.zip`, `DNBR<ano>_csv.zip` e `SINASC_<ano>_csv.zip`, 2003–2026, 3,4 GB) também ficam em `data/manual/`, mas fora do git por causa do tamanho. Foram baixados à mão de dadosabertos.saude.gov.br, porque o TabNet recusa acesso automatizado. Sem eles, as etapas 1.17 e 1.27 falham sem interromper o pipeline, e o painel sai sem as colunas de mortalidade; os hashes estão no manifesto.
 
 ## Limitações principais
 

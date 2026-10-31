@@ -61,8 +61,8 @@ ETAPAS = [
     Etapa("1.15", "Fase 3: Comex Stat (download)", "src.ingest.comex_download", rede=True,
           nota="TLS sem verificação só para balanca.economia.gov.br (certificado incompleto do servidor)"),
     Etapa("1.16", "Fase 3: Comex Stat por AMC", "src.ingest.comex"),
-    Etapa("1.17", "Fase 3: DATASUS", "src.ingest.datasus", rede=True, opcional=True,
-          nota="TabNet bloqueia acesso automatizado; pendente (outputs/pendencias.md)"),
+    Etapa("1.17", "Fase 3: DATASUS, microdados do SIM", "src.ingest.sim", opcional=True,
+          nota="exige Mortalidade_Geral_<ano>_csv.zip em data/manual/ (fora do git; ver README)"),
     Etapa("1.18", "Fase 4: painéis", "src.build_panel"),
     Etapa("1.19", "Fase 5: descritiva", "src.descriptives"),
     Etapa("1.20", "Fase 6: modelos", "src.models"),
@@ -72,6 +72,8 @@ ETAPAS = [
     Etapa("1.24", "Extra coortes: análise com o Censo", "src.coortes"),
     Etapa("1.25", "Extra coortes: perfil do eleitorado (TSE)", "src.ingest.tse_perfil", rede=True),
     Etapa("1.26", "Extra coortes: análise com o TSE", "src.coortes_tse"),
+    Etapa("1.27", "Extra mortalidade: homicídios e Covid × voto", "src.extra_mortalidade", opcional=True,
+          nota="depende da etapa 1.17"),
     # ---------------- Estudo 2: pacto 2.0
     Etapa("2.01", "TSE por seção e locais de votação (2018, 2022, 2026)", "src.ingest.tse_secao_download",
           ["2018", "2022", "2026"], rede=True, nota="~16 GB com o placebo"),
@@ -91,6 +93,8 @@ ETAPAS = [
     Etapa("2.13", "Fase E: figuras", "src.pacto20_saidas"),
     Etapa("2.14", "Boletins de urna do 2º turno de 2026", "src.ingest.tse_bu", rede=True),
     Etapa("2.15", "Conferência: boletins de urna × arquivos por seção", "src.pacto20_bu"),
+    Etapa("2.16", "Extra: perfil dos lugares em que Lula mais cresceu entre turnos", "src.extra_entre_turnos", opcional=True,
+          nota="depende da etapa 1.17"),
     # ---------------- Estudo 3: polarização comparada
     Etapa("3.01", "V-Dem v16, ERT v16, UCDP/PRIO 25.1, Archigos 4.1", "src.ingest.p3_dados", rede=True),
     Etapa("3.02", "Fase A: painel país-ano", "src.p3_painel"),

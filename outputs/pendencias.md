@@ -327,3 +327,24 @@
 ## Reprodutibilidade — semente do Moran global (31/10/2026)
 - `esda.Moran` sorteia as permutações no gerador global do NumPy, e `src/spatial.py` não fixava semente, ao contrário do que dizia o README. O `z` (pseudo-z das permutações) de `fase7_espacial_moran` variava entre rodadas (até 11 pontos, com z entre 100 e 130); `moran_I` e `p_sim` não variavam. Semente fixada em `src/spatial.py` e `src/p3_brasil.py`.
 - `fase7_robustez`, especificação (b) sem ponderação: os erros-padrão de 11 de 126 linhas diferem da versão anterior em até 0,04%, com estimativas idênticas e painel idêntico célula a célula. Duas rodadas seguidas agora dão o mesmo resultado; a causa da diferença em relação à rodada de 28/10/2026 não foi identificada.
+
+## DATASUS — microdados do SIM (31/10/2026)
+- O usuário baixou e salvou em `data/manual/` os arquivos `Mortalidade_Geral_<ano>_csv.zip`, 2003–2026 (1,4 GB). Ficam fora do git (`.gitignore`), por causa do tamanho, e com hash no manifesto. Origem informada pelo usuário: portal de dados abertos do Ministério da Saúde (dadosabertos.saude.gov.br).
+- **Completude:** 2025 é preliminar (só janeiro a setembro) e 2026 é segunda prévia (só janeiro a agosto), segundo o usuário e conferido nos dados. Ficam fora das taxas anuais (`config.yaml`, `sim.ultimo_ano_completo: 2024`). Na eleição de 2026, a janela de homicídios é 2022–2024, a mesma do exemplo do PLANO.
+- **Validação:** óbitos infantis de 2022 = 32.238, igual à consulta ao TabNet registrada na seção DATASUS. Homicídios + intervenção legal de 2017 somam 65.602 antes de descartar município ignorado; o valor coincide com o Atlas da Violência de memória, não baixado.
+- 0,28% dos óbitos têm município ignorado (código de UF) e são descartados.
+- Taxa de mortalidade infantil: resolvida com o SINASC (seção seguinte).
+- Homicídios entram no painel, mas não nos modelos principais, para não alterar resultados publicados. As colunas antigas do painel ficaram idênticas.
+
+## CadÚnico: série disponível vai só até 2017 (31/10/2026)
+- Segundo o usuário, os dados de CadÚnico disponíveis terminam em 2017. Com a série do PLANO começando por volta de 2012, cobririam só as eleições de 2014 e 2018, e não 2022 nem 2026. Não servem para comparar 2010 com 2026 (H1).
+- **Fallback:** continua `pbf_100hab` (benefícios do Bolsa Família em dezembro por 100 hab.), que já está no painel e vai até 2025.
+
+## DATASUS — nascidos vivos e arquivo de 2015 truncado (31/10/2026)
+- O usuário salvou em `data/manual/` os arquivos `DNBR<ano>_csv.zip` (2003–2015) e `SINASC_<ano>_csv.zip` (2016–2026), também de dadosabertos.saude.gov.br. Somam 2 GB, ficam fora do git e têm hash no manifesto. `tmi_trienal` e `tmi_trienal_eb` entraram no painel; as colunas antigas ficaram idênticas.
+- **`DNBR2015.csv` está truncado:** a última linha para no meio de um registro (6 de 64 campos), embora o zip esteja íntegro. São 2.786.525 linhas; faltam cerca de 230 mil nascimentos. Por UF, contra a média de 2014 e 2016: AP 3,6%, AC 3,9%, RO 14%, RR 19%, AM 20%, TO 56%, CE 87%, PA 90%, PE 90%, RS 95%.
+- Conferidos os 48 arquivos manuais: última linha de cada um e razão por UF × ano contra os anos vizinhos. Só `DNBR2015` tem problema. Os picos de óbitos em 2021 são a Covid.
+- **Tratamento:** nenhum valor estimado. `sim.nv_anos_truncados: [2015]` em `config.yaml` tira 2015 do painel; a taxa fica vazia nas janelas 2013–2015 a 2015–2017, ou seja, sem mortalidade infantil na eleição de 2018.
+- **Ação:** baixar `DNBR2015` de novo. Se o arquivo vier completo, remover 2015 de `nv_anos_truncados` e rodar as etapas 1.17, 1.18 e 1.27.
+- Nascidos vivos de 2025 têm os 12 meses, mas não entram: o numerador (SIM) só vai até setembro. 2026 vai até agosto.
+- A mortalidade infantil, como os homicídios, fica fora dos modelos principais, para não alterar resultados publicados.

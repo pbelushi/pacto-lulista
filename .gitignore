@@ -9,3 +9,8 @@ __pycache__/
 # reprodução
 .venv/
 *.part
+
+# microdados do SIM e do SINASC: 3,4 GB, fora do git (hashes em data/manifesto_dados.csv)
+data/manual/Mortalidade_Geral_*
+data/manual/DNBR*
+data/manual/SINASC_*

@@ -45,7 +45,7 @@ def gerar() -> None:
         w = csv.DictWriter(f, fieldnames=["arquivo", "bytes", "sha256"])
         w.writeheader()
         w.writerows(linhas)
-    print(f"{len(linhas)} arquivos, {sum(l['bytes'] for l in linhas) / 1e9:.1f} GB → {SAIDA.relative_to(RAIZ)}")
+    print(f"{len(linhas)} arquivos, {sum(l['bytes'] for l in linhas) / 1e9:.1f} GB: {SAIDA.relative_to(RAIZ)}")
 
 
 def conferir() -> int:

@@ -1,5 +1,8 @@
 """Mortalidade infantil e homicídios por município, via TabNet/DATASUS (SIM e SINASC), 2003–2025.
 
+Fora do pipeline: o TabNet recusa acesso automatizado (outputs/pendencias.md); SIM e SINASC vêm de src/ingest/sim.py.
+Fica aqui bayes_empirico, usado pelo painel.
+
 Consultas (src/ingest/tabnet.py), sempre por município de **residência**:
 - SIM (sim/cnv/obt10br.def, 'Óbitos_p/Residênc', arquivos obtbrAA.dbf):
   - obitos_infantis: SFaixa_Etária = 'Menor 1 ano'

@@ -1,6 +1,7 @@
 """Fase 6 — modelos (docs/planos/PLANO.md, seção 5).
 
-Covariáveis (DATASUS e % de cadastrados no CadÚnico pendentes):
+Covariáveis (% de cadastrados no CadÚnico fora; homicídios e mortalidade infantil só em
+src/extra_mortalidade.py):
   log_pop, log_pib_pc (PIB per capita real), part_vab_agro, part_vab_adm_publica, ideb,
   pbf_100hab (benefícios do Bolsa Família em dezembro por 100 hab.; proxy direta de pobreza, H1),
   log_export_commod_pc (log de 1 + exportações de commodities SH 01–27 per capita; H3),

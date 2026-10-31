@@ -76,6 +76,12 @@ saldo_pc_real,"Saldo comercial por habitante, R$ de dez/2025",Comex Stat (MDIC/S
 pct_commodities,% commodities (SH 01–27) nas exportações; NaN se não exporta,Comex Stat,%,62.4
 hhi_exp,Concentração da pauta exportadora (HHI sobre SH4); NaN se não exporta,Comex Stat,0–1,62.4
 ano_ref_comex,Ano do Comex usado,—,ano,0.0
+tx_homicidio_trienal,"Homicídios (X85–Y09) por 100 mil hab., residência, média de 3 anos",DATASUS SIM,taxa,0.0
+tx_homicidio_trienal_eb,"Idem, com suavização Bayesiana empírica",DATASUS SIM,taxa,0.0
+tx_intervencao_legal_trienal,"Mortes por intervenção legal (Y35–Y36) por 100 mil hab., média de 3 anos",DATASUS SIM,taxa,0.0
+tmi_trienal,"Óbitos de menores de 1 ano por mil nascidos vivos, residência, janela de 3 anos",DATASUS SIM e SINASC,taxa,16.7
+tmi_trienal_eb,"Idem, com suavização Bayesiana empírica",DATASUS SIM e SINASC,taxa,16.7
+ano_ref_sim,Último ano da janela trienal do SIM usada (2024 na eleição de 2026),—,ano,0.0
 pct_branca,% branca,"IBGE Censos 2010/2022 (SIDRA 9605, 2103, 9537; trabalho: 1572, 1577, 6580, 10261)",%,16.7
 pct_preta,% preta,"IBGE Censos 2010/2022 (SIDRA 9605, 2103, 9537; trabalho: 1572, 1577, 6580, 10261)",%,16.7
 pct_parda,% parda,"IBGE Censos 2010/2022 (SIDRA 9605, 2103, 9537; trabalho: 1572, 1577, 6580, 10261)",%,16.7
