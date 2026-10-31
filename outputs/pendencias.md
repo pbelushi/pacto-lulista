@@ -348,3 +348,11 @@
 - **Ação:** baixar `DNBR2015` de novo. Se o arquivo vier completo, remover 2015 de `nv_anos_truncados` e rodar as etapas 1.17, 1.18 e 1.27.
 - Nascidos vivos de 2025 têm os 12 meses, mas não entram: o numerador (SIM) só vai até setembro. 2026 vai até agosto.
 - A mortalidade infantil, como os homicídios, fica fora dos modelos principais, para não alterar resultados publicados.
+
+## Extra raça: pretos × pardos (31/10/2026)
+- **Sigilo de setores:** "X" conta como 0, como em `pct_negra`. Pretos caem em sigilo mais que pardos: 6,0% contra 2,4% dos setores e 1,8% contra 0,4% da população, em setores de mediana de 69 pessoas. Por AMC, o viés de % preta é de −0,04 p.p. em média e de −3,5% relativo no quintil com menos pretos (`extra_raca_sigilo_quintil`). Considerado pequeno; nenhuma correção aplicada.
+- **Setores sem linha na tabela de cor:** 14.008 setores da malha não estão no arquivo de cor; ficam fora, como em `pct_negra`.
+- **Entorno:** refeito em `data/interim/extra_raca_entorno_<ano>.parquet`, sem tocar em `pacto20_entorno_<ano>.parquet` nem em `pacto20_setores.parquet`. O `pct_negra` recalculado é idêntico ao publicado nos cinco anos.
+- **Escolaridade nas AMCs:** usado o Censo 2022 (SIDRA 10061, adultos de 18 anos ou mais), que tem nível municipal e abre por cor. Não foi preciso recorrer ao perfil do TSE. Nos locais segue o perfil do TSE: os moderadores de R2 medem coisas diferentes entre os níveis.
+- **R1 em duas unidades:** por 1 DP, como pede o plano, e por 1 p.p., porque o DP de % parda é cerca de três vezes o de % preta. O veredito muda com a unidade e está explicado na nota.
+- **Previsão que falhou:** o plano esperava efeito nulo de % preta no Δ Flávio Bolsonaro; o efeito é negativo e significativo.

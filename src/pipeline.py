@@ -95,6 +95,9 @@ ETAPAS = [
     Etapa("2.15", "Conferência: boletins de urna × arquivos por seção", "src.pacto20_bu"),
     Etapa("2.16", "Extra: perfil dos lugares em que Lula mais cresceu entre turnos", "src.extra_entre_turnos", opcional=True,
           nota="depende da etapa 1.17"),
+    Etapa("2.17", "Extra raça: instrução por cor, Censo 2022", "src.ingest.ibge_instrucao", rede=True),
+    Etapa("2.18", "Extra raça: % preta e % parda no entorno, 2010–2026", "src.extra_raca_entorno", nota="~2h15 em série"),
+    Etapa("2.19", "Extra raça: Fases A, B e C", "src.extra_raca", opcional=True, nota="depende da etapa 2.16"),
     # ---------------- Estudo 3: polarização comparada
     Etapa("3.01", "V-Dem v16, ERT v16, UCDP/PRIO 25.1, Archigos 4.1", "src.ingest.p3_dados", rede=True),
     Etapa("3.02", "Fase A: painel país-ano", "src.p3_painel"),

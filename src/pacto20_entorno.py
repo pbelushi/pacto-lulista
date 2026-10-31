@@ -143,6 +143,11 @@ def _agregar(ent: gpd.GeoDataFrame, st: gpd.GeoDataFrame) -> pd.DataFrame:
         "pct_urbana": 100 * soma("w", "urbana") / g["w"].sum(),
     })
     out["densidade"] = out["pop_entorno"] / out["area_entorno_km2"]
+    # só com os setores de src/extra_raca_entorno.py; mesma regra de pct_negra
+    for c in ["preta", "parda"]:
+        if f"cor_{c}" in ov:
+            ov[c] = ov[f"cor_{c}"] / ov["cor_total"]
+            out[f"pct_{c}"] = 100 * soma("w_cor", c) / g["w_cor"].sum()
     return out.reset_index()
 
 

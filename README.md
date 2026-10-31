@@ -7,7 +7,7 @@ Três estudos empíricos, com código e resultados replicáveis, sobre a base el
 | Estudo | Pergunta | Unidade e período | Relatório |
 |---|---|---|---|
 | **1. Pacto lulista** | A base territorial do voto petista no 2º turno (municípios pobres, nordestinos, dependentes de transferências) se manteve, se deslocou ou se dissolveu? | 5.565 AMCs, eleições de 2006 a 2026 | [`outputs/report/relatorio.md`](outputs/report/relatorio.md), [`extra_coortes.md`](outputs/report/extra_coortes.md) e [`extra_mortalidade.md`](outputs/report/extra_mortalidade.md) |
-| **2. Pacto lulista 2.0** | Dentro das mesmas cidades, os locais de votação mais jovens e mais negros passaram a votar mais no PT, líquido de renda? | ~80 mil locais de votação, 2018–2026 (placebo 2010–2014) | [`outputs/report/pacto20.md`](outputs/report/pacto20.md) e [`extra_entre_turnos.md`](outputs/report/extra_entre_turnos.md) |
+| **2. Pacto lulista 2.0** | Dentro das mesmas cidades, os locais de votação mais jovens e mais negros passaram a votar mais no PT, líquido de renda? | ~80 mil locais de votação, 2018–2026 (placebo 2010–2014) | [`outputs/report/pacto20.md`](outputs/report/pacto20.md) , [`extra_entre_turnos.md`](outputs/report/extra_entre_turnos.md) e [`extra_raca.md`](outputs/report/extra_raca.md) |
 | **3. A polarização se resolve?** | Episódios de polarização intensa terminam por conflito, cesarismo, pacto ou despolarização? Onde está o Brasil? | 269 episódios em 95 países, 1900–2025; Brasil 1994–2026 | [`outputs/report/p3_relatorio.md`](outputs/report/p3_relatorio.md) e [`p3_afe.md`](outputs/report/p3_afe.md) |
 
 Os planos de pesquisa que guiaram cada estudo estão em [`docs/planos/`](docs/planos/). As decisões de dados (fontes indisponíveis, alternativas adotadas, correções) estão registradas, em ordem cronológica, em [`outputs/pendencias.md`](outputs/pendencias.md).
@@ -57,7 +57,7 @@ python -m pip install -r requirements.txt
 **Execução.** Um comando refaz tudo, das descargas às figuras:
 
 ```bash
-python -m src.pipeline --listar           # as 51 etapas, com o comando de cada uma
+python -m src.pipeline --listar           # as 54 etapas, com o comando de cada uma
 python -m src.pipeline --testes           # tudo + pytest ao fim
 python -m src.pipeline --estudo 3         # só um estudo (o 2 e o 3 usam o painel e a malha do estudo 1)
 python -m src.pipeline --sem-rede         # sem downloads, com data/raw/ já preenchido
@@ -65,7 +65,7 @@ python -m src.pipeline --a-partir-de 2.05 # retoma de uma etapa
 python -m src.manifesto --conferir        # compara os dados baixados com os da publicação
 ```
 
-**Custo.** Cerca de 22 GB em `data/raw/` (16 GB só dos arquivos do TSE por seção; 6.718 arquivos no manifesto) e algumas horas de execução. As etapas mais longas são o entorno censitário dos locais de votação (~80 min para 2018–2026 e ~55 min para 2010–2014) e os downloads.
+**Custo.** Cerca de 22 GB em `data/raw/` (16 GB só dos arquivos do TSE por seção; 6.745 arquivos no manifesto) e algumas horas de execução. As etapas mais longas são o entorno censitário dos locais de votação (~80 min para 2018–2026 e ~55 min para 2010–2014) e os downloads.
 
 **Determinismo.** Bootstraps e permutações usam sementes fixas (no estudo 1, as do Moran global desde 31/10/2026). As fontes oficiais republicam arquivos com correções. Se `src.manifesto --conferir` acusar diferença, os resultados podem mudar marginalmente. Os arquivos usados na publicação foram baixados entre 25 e 31/10/2026 (os `*_munzona_2026` são os republicados pelo TSE em 30–31/10/2026, já com o 2º turno).
 
