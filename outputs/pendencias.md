@@ -5,7 +5,7 @@
 ### 2026: 2º turno ausente do CDN de Dados Abertos (27/10/2026)
 - `votacao_candidato_munzona_2026.zip` e `detalhe_votacao_munzona_2026.zip` foram gerados em 25/10/2026, por volta de 12h30 (horário de Brasília), antes do fim da votação, e só têm o 1º turno.
 - **Fallback adotado** (docs/planos/PLANO.md, seção 3): JSON do Portal Resultados, eleição 6258 (federal, 2º turno), um arquivo por município (`src/ingest/tse_portal.py`). Todos os arquivos estão 100% totalizados (`s.st == s.ts`).
-- **Ação:** quando o TSE republicar os arquivos de 2026 com o 2º turno, rodar de novo `python -m src.ingest.tse_download` e `python -m src.ingest.tse`. O código detecta o 2º turno no CDN e passa a usá-lo automaticamente. Depois, comparar com a versão do portal.
+- **Ação:** quando o TSE republicar os arquivos de 2026 com o 2º turno, rodar de novo `python -m src.ingest.tse_download` e `python -m src.ingest.tse`. O código detecta o 2º turno no CDN e passa a usá-lo automaticamente. Depois, comparar com a versão do portal. **Feito em 31/10/2026** (ver seção ao fim deste arquivo).
 
 ### Voto em trânsito
 - O PLANO pede excluir o voto em trânsito. Só em **2010 e 2014** os arquivos `*_munzona` marcam as seções de trânsito (`ST_VOTO_EM_TRANSITO = 'S'`), e lá elas foram excluídas. Em 2006, 2018 e 2022 a flag é sempre `N`. Nesses anos, e em 2026 (portal), o voto em trânsito fica contado no município onde foi dado e não dá para separá-lo.
@@ -309,3 +309,21 @@
 ## Plano3 — libertações da Segunda Guerra mantidas (28/10/2026)
 
 - **Decisão do usuário:** as libertações de 1944–45 (França 1941–1945, Luxemburgo 1941–1944, Noruega 1943–1945, codificadas como pacto) **não** são excluídas. Foram promovidas também por agentes internos (Resistência francesa) junto com os Aliados; o mesmo vale para Iugoslávia e Grécia com os partisans (SRB-1942 e GRC-1937, vitória de um polo). Só França 1940 e Ucrânia 2022 (desfecho de invasão) ficam excluídos.
+
+## Fase 1 — 2º turno de 2026 republicado no CDN (31/10/2026)
+- O TSE republicou `detalhe_votacao_munzona_2026.zip` (gerado em 30/10/2026, 22h46), `votacao_candidato_munzona_2026.zip` (31/10/2026, 12h07) e `votacao_partido_munzona_2026.zip` (31/10/2026), agora com o 2º turno. Baixados por `src.ingest.tse_download`; a Fase 1 (`src.ingest.tse`) detectou o 2º turno e deixou de usar o Portal Resultados.
+- **Conferência:** totais nacionais (Lula 64.256.232; Bolsonaro 59.826.041; aptos 158.745.502; comparecimento 128.236.074; abstenções 30.509.005) iguais aos do `br.json` do portal; e, município a município (5.571 municípios), zero diferença em votos, aptos, comparecimento, abstenções, brancos e nulos entre a versão do CDN e a do portal. Tabelas e figuras não mudam de valor; muda só a coluna `fonte` ("TSE CDN") e os rótulos de fonte.
+- `src/p3_brasil.py` deixou de tratar o 2º turno de 2026 como caso especial (lia do painel do projeto) e passou a ler o CDN como nos demais anos.
+- O Portal Resultados continua no pipeline (etapa 1.02) pelo crosswalk TSE→IBGE e pelo check de deputado federal, e como fallback automático da Fase 1.
+- **Não republicados** (conferido em 31/10/2026): `votacao_secao_2026_BR.zip` e `detalhe_votacao_secao_2026.zip` (26/10/2026; já traziam o 2º turno e são a base do pacto 2.0) e `perfil_comparecimento_abstencao_2026.zip` (21/10/2026; só 1º turno). O comparecimento por sexo e idade no 2º turno de 2026 segue indisponível.
+
+## Pacto 2.0 — boletins de urna do 2º turno de 2026 (31/10/2026)
+- A pedido do usuário, baixados os BU do 2º turno (`src/ingest/tse_bu.py`): 28 arquivos (27 UFs + ZZ), 138 MB, gerados em 26/10/2026, 07h42, todos conferidos com o SHA-512 publicado. O catálogo do portal de dados abertos aponta o BU de RR para o `.sha512` por engano; o `.zip` existe na URL de padrão igual ao das outras UFs.
+- **Conferência** (`src/pacto20_bu.py`, `outputs/tables/pacto20_bu_conferencia`): nas 499.205 seções comuns, zero diferença entre BU e `votacao_secao_2026_BR` / `detalhe_votacao_secao_2026` em votos de 13 e 22, brancos, nulos, aptos e comparecimento. Com o exterior, Lula 64.256.232, Bolsonaro 59.826.041.
+- 43 seções estão só no arquivo por seção: 525 aptos e nenhum comparecimento. Explica a diferença de aptos entre os dois totais (158.745.502 no arquivo por seção; 158.744.977 nos BU).
+- **Consequência:** a base do pacto 2.0 já tinha o 2º turno correto e os arquivos que a alimentam não foram republicados. O estudo 2 não foi refeito.
+- O BU não traz sexo nem idade. O comparecimento por sexo e idade no 2º turno de 2026 continua dependendo da republicação de `perfil_comparecimento_abstencao_2026.zip`.
+
+## Reprodutibilidade — semente do Moran global (31/10/2026)
+- `esda.Moran` sorteia as permutações no gerador global do NumPy, e `src/spatial.py` não fixava semente, ao contrário do que dizia o README. O `z` (pseudo-z das permutações) de `fase7_espacial_moran` variava entre rodadas (até 11 pontos, com z entre 100 e 130); `moran_I` e `p_sim` não variavam. Semente fixada em `src/spatial.py` e `src/p3_brasil.py`.
+- `fase7_robustez`, especificação (b) sem ponderação: os erros-padrão de 11 de 126 linhas diferem da versão anterior em até 0,04%, com estimativas idênticas e painel idêntico célula a célula. Duas rodadas seguidas agora dão o mesmo resultado; a causa da diferença em relação à rodada de 28/10/2026 não foi identificada.

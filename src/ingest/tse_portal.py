@@ -1,8 +1,10 @@
 """Download do 2º turno presidencial de 2026 via Portal Resultados do TSE (fallback).
 
-Os arquivos consolidados de Dados Abertos (votacao_candidato_munzona_2026.zip) foram
-publicados antes do 2º turno (25/10/2026) e não o contêm. Fallback previsto no docs/planos/PLANO.md,
-seção 3: JSON do Portal Resultados, um arquivo por município.
+Os arquivos consolidados de Dados Abertos (votacao_candidato_munzona_2026.zip) publicados em 25/10/2026
+não continham o 2º turno; o TSE os republicou em 30–31/10/2026 e a Fase 1 passou a usá-los. Este fallback
+(docs/planos/PLANO.md, seção 3: JSON do Portal Resultados, um arquivo por município) continua necessário pelo
+crosswalk TSE→IBGE (mun-cm.json) e pelo check de deputado federal, e entra na Fase 1 se o CDN não tiver o
+2º turno.
 
 Endpoints (eleição federal 2º turno 2026 = código 6258, cargo Presidente = c0001):
 - config de municípios: {base}/ele2026/6258/config/mun-e006258-cm.json

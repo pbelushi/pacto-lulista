@@ -246,4 +246,4 @@
 
 Por UF; mesmas definições da tabela nacional.
 
-Fonte: TSE, Dados Abertos (1994–2026) e Portal Resultados (2026, 2º turno); IBGE; Atlas DH. Elaboração própria.
+Fonte: TSE, Dados Abertos (1994–2026); IBGE; Atlas DH. Elaboração própria.

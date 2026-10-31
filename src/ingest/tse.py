@@ -3,8 +3,10 @@
 Fontes (TSE, Dados Abertos, CDN — ver src/ingest/tse_download.py):
 - votacao_candidato_munzona_<ano>.zip → arquivo <...>_BRASIL.csv, filtro CD_CARGO=1 (Presidente), NR_TURNO=2
 - detalhe_votacao_munzona_<ano>.zip → arquivo <...>_BRASIL.csv, mesmo filtro
-- 2026: o CDN só tem o 1º turno (arquivos gerados em 25/10/2026 antes do fim da votação).
-  Fallback = Portal Resultados (src/ingest/tse_portal.py), eleição 6258, cargo c0001.
+- 2026: os arquivos gerados em 25/10/2026 só tinham o 1º turno; o TSE os republicou em 30–31/10/2026 com o
+  2º turno, idêntico município a município ao Portal Resultados (conferido em 31/10/2026). O fallback pelo
+  Portal (src/ingest/tse_portal.py, eleição 6258, cargo c0001) fica no código e entra automaticamente se o
+  CDN não tiver o 2º turno (_tem_2turno_cdn).
 
 Regras:
 - Excluídos: exterior (SG_UF = 'ZZ') e seções de voto em trânsito (ST_VOTO_EM_TRANSITO = 'S').

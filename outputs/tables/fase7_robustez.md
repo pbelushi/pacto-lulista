@@ -34,7 +34,7 @@
 | (b) sem ponderação             | E2        | part_vab_adm_publica   |     -0.522   | 0.856   | 0.542    | -2.2      |   1.16   | False                       |    nan        |
 | (b) sem ponderação             | E2        | pct_evangelica         |     -2.18    | 0.328   | 2.94e-11 | -2.82     |  -1.54   | True                        |    nan        |
 | (b) sem ponderação             | E5        | pct_negra              |      2.6     | 0.608   | 1.9e-05  |  1.41     |   3.79   | True                        |    nan        |
-| (b) sem ponderação             | E5        | pct_evangelica         |     -0.309   | 0.226   | 0.172    | -0.751    |   0.134  | True                        |    nan        |
+| (b) sem ponderação             | E5        | pct_evangelica         |     -0.309   | 0.226   | 0.172    | -0.752    |   0.134  | True                        |    nan        |
 | (b) sem ponderação             | E3        | part_vab_adm_publica_0 |      0.927   | 0.549   | 0.0915   | -0.15     |   2      | True                        |    nan        |
 | (b) sem ponderação             | E3        | ideb_0                 |     -2.15    | 0.324   | 2.93e-11 | -2.79     |  -1.52   | True                        |    nan        |
 | (b) sem ponderação             | E3        | pbf_100hab_0           |      1.85    | 0.496   | 0.000186 |  0.881    |   2.82   | True                        |    nan        |

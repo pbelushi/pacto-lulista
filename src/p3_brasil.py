@@ -6,8 +6,9 @@ social do voto (R²) em queda; conflito → o contrário (voto estruturado e con
 Fontes: TSE, CDN de Dados Abertos (detalhe_votacao_munzona e votacao_candidato_munzona, arquivos _BRASIL),
 1994–2026. 1989 não está no CDN (HTTP 404 em 28/10/2026): a série começa em 1994 (registrado em pendencias.md).
 1994 e 1998 não tiveram 2º turno, então os indicadores comparáveis são do 1º turno; o 2º turno entra de 2002 em
-diante. 2026, 2º turno: do painel do projeto (Portal Resultados), porque o CDN não tinha o 2º turno quando o
-painel foi montado. Exterior (SG_UF = ZZ) e voto em trânsito (SG_UF = VT, em 2010) excluídos.
+diante. Os arquivos de 2026 são os republicados pelo TSE em 30–31/10/2026, com o 2º turno (os de 25/10/2026 só
+tinham o 1º; nesse intervalo o 2º turno vinha do painel do projeto, montado do Portal Resultados, com os mesmos
+números município a município). Exterior (SG_UF = ZZ) e voto em trânsito (SG_UF = VT, em 2010) excluídos.
 
 Indicadores (nacional e por UF; R² e Moran só nacional):
 - abstenção (% dos aptos), brancos e nulos (% do comparecimento), 1º turno (e 2º quando houver);
@@ -47,7 +48,7 @@ warnings.filterwarnings("ignore", category=FutureWarning)
 ANOS = [1994, 1998, 2002, 2006, 2010, 2014, 2018, 2022, 2026]
 PT = 13
 COVS = ["idhm_2010", "pct_negra", "pct_evangelica", "pct_sem_religiao", "log_pib_pc", "part_vab_agro"]
-FONTE = "Fonte: TSE, Dados Abertos (1994–2026) e Portal Resultados (2026, 2º turno); IBGE; Atlas DH. Elaboração própria."
+FONTE = "Fonte: TSE, Dados Abertos (1994–2026); IBGE; Atlas DH. Elaboração própria."
 
 
 def _ler(conjunto: str, ano: int, cols: list[str]) -> pd.DataFrame:
@@ -137,6 +138,7 @@ def moran(s: pd.Series, malha) -> tuple[float, float]:
         warnings.simplefilter("ignore")
         w = Queen.from_dataframe(g, use_index=False)
         w.transform = "r"
+        np.random.seed(20261028)  # esda.Moran sorteia as permutações no gerador global
         mi = Moran(g["y"].values, w, permutations=999)
     return mi.I, mi.p_sim
 
@@ -146,7 +148,6 @@ def main() -> None:
 
     malha = gpd.read_parquet(caminho("interim") / "malha_amc.parquet")[["id_amc", "geometry"]]
     x = covariaveis()
-    painel = pd.read_parquet(caminho("processed") / "painel_eleicoes.parquet")
     nac, uf, estr = [], [], []
     for ano in ANOS:
         m, cand = eleicao(ano)
@@ -155,8 +156,6 @@ def main() -> None:
         a = _amc(m)
         for t in [1, 2]:
             s = a[a["NR_TURNO"] == t].set_index("id_amc")
-            if ano == 2026 and t == 2:  # 2º turno de 2026 do painel (Portal Resultados)
-                s = painel[painel["eleicao"] == 2026].set_index("id_amc")[["validos", "votos_pt", "aptos"]]
             if s.empty:
                 continue
             spt = 100 * s["votos_pt"] / s["validos"]
@@ -167,18 +166,6 @@ def main() -> None:
         log.info("%d: indicadores calculados", ano)
     n = pd.concat(nac).drop(columns="br")
     u = pd.concat(uf)
-    # 2º turno de 2026: o CDN não o tinha quando o painel foi montado; vem do painel (Portal Resultados)
-    p26 = painel[painel["eleicao"] == 2026]
-    def t2(g: pd.DataFrame) -> pd.Series:
-        s = g[["aptos", "abstencoes", "comparecimento", "brancos", "nulos", "validos", "votos_pt"]].sum()
-        return pd.Series({"abstencao_t2": 100 * s["abstencoes"] / s["aptos"],
-                          "brancos_nulos_t2": 100 * (s["brancos"] + s["nulos"]) / s["comparecimento"],
-                          "s_pt_t2": 100 * s["votos_pt"] / s["validos"]})
-    for c, v in t2(p26).items():
-        n.loc[n["ano"] == 2026, c] = v
-    por_uf = p26.groupby("sg_uf").apply(t2, include_groups=False)
-    for c in por_uf:
-        u.loc[u["ano"] == 2026, c] = u.loc[u["ano"] == 2026, "SG_UF"].map(por_uf[c]).values
     e = pd.DataFrame(estr).pivot(index="ano", columns="turno", values=["r2_estrutura_social", "moran_i", "amcs_com_dado"])
     e.columns = [f"{a}_t{t}" for a, t in e.columns]
     n = n.merge(e.reset_index(), on="ano", how="left")

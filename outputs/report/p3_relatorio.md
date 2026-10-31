@@ -150,7 +150,7 @@ Os intervalos são largos: o modelo combina 269 episódios de todos os regimes, 
 
 ![Indicadores brasileiros](../figures/p3_e_indicadores.png)
 
-*Figura 6. Indicadores de esgotamento (abstenção, brancos e nulos, votos fora dos dois primeiros, número efetivo de candidatos) e de conflito (R² da estrutura social, Moran's I) do voto presidencial, 1994–2026. Fonte: TSE, Dados Abertos e Portal Resultados; IBGE; Atlas DH.*
+*Figura 6. Indicadores de esgotamento (abstenção, brancos e nulos, votos fora dos dois primeiros, número efetivo de candidatos) e de conflito (R² da estrutura social, Moran's I) do voto presidencial, 1994–2026. Fonte: TSE, Dados Abertos; IBGE; Atlas DH.*
 
 | | 2006 | 2014 | 2018 | 2022 | 2026 |
 |---|---|---|---|---|---|
@@ -199,4 +199,4 @@ Conforme o `docs/planos/plano3.md`. Edições e páginas devem ser conferidas an
 - V-Dem v16 (Coppedge et al., 2026), via `vdeminstitute/vdemdata`; ERT v16, via `vdeminstitute/ERT`.
 - UCDP/PRIO Armed Conflict Dataset v25.1.
 - Archigos 4.1 (Goemans, Gleditsch e Chiozza).
-- TSE, Dados Abertos e Portal Resultados.
+- TSE, Dados Abertos (Portal Resultados para o crosswalk de municípios).

@@ -85,6 +85,7 @@ def moran_global(z: pd.DataFrame, dl: pd.DataFrame, geo, w) -> pd.DataFrame:
         if not ok.all():  # AMC sem covariável (ex.: 1 em 2006): restringe a vizinhança às disponíveis
             ww = w_subset(w, list(ids[ok]))
             ww.transform = "r"
+        np.random.seed(20261027)  # esda.Moran sorteia as permutações no gerador global
         mi = Moran(v.to_numpy()[ok], ww, permutations=999)
         linhas.append({"serie": rotulo, "n": int(ok.sum()), "moran_I": mi.I, "E_I": mi.EI, "z": mi.z_sim,
                        "p_sim": mi.p_sim})

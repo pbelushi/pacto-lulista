@@ -12,4 +12,4 @@
 
 Brasil sem exterior. t1/t2 = 1º/2º turno (1994 e 1998 sem 2º turno). terceiros_t1 = votos fora dos dois primeiros colocados nacionais, % dos válidos. R² = WLS da % do PT nos válidos por AMC sobre estrutura social fixa (IDHM 2010, % negra, % evangélica, % sem religião, log PIB per capita, % agro no VAB). Moran's I: contiguidade queen entre AMCs (todos com p < 0,01, 999 permutações). Em 1994 e 1998 as AMCs de municípios criados em 1997/2001 ficam sem dado.
 
-Fonte: TSE, Dados Abertos (1994–2026) e Portal Resultados (2026, 2º turno); IBGE; Atlas DH. Elaboração própria.
+Fonte: TSE, Dados Abertos (1994–2026); IBGE; Atlas DH. Elaboração própria.

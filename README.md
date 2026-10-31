@@ -57,7 +57,7 @@ python -m pip install -r requirements.txt
 **Execução.** Um comando refaz tudo, das descargas às figuras:
 
 ```bash
-python -m src.pipeline --listar           # as 47 etapas, com o comando de cada uma
+python -m src.pipeline --listar           # as 49 etapas, com o comando de cada uma
 python -m src.pipeline --testes           # tudo + pytest ao fim
 python -m src.pipeline --estudo 3         # só um estudo (o 2 e o 3 usam o painel e a malha do estudo 1)
 python -m src.pipeline --sem-rede         # sem downloads, com data/raw/ já preenchido
@@ -65,9 +65,9 @@ python -m src.pipeline --a-partir-de 2.05 # retoma de uma etapa
 python -m src.manifesto --conferir        # compara os dados baixados com os da publicação
 ```
 
-**Custo.** Cerca de 22 GB em `data/raw/` (16 GB só dos arquivos do TSE por seção; 6.642 arquivos no manifesto) e algumas horas de execução. As etapas mais longas são o entorno censitário dos locais de votação (~80 min para 2018–2026 e ~55 min para 2010–2014) e os downloads.
+**Custo.** Cerca de 22 GB em `data/raw/` (16 GB só dos arquivos do TSE por seção; 6.670 arquivos no manifesto) e algumas horas de execução. As etapas mais longas são o entorno censitário dos locais de votação (~80 min para 2018–2026 e ~55 min para 2010–2014) e os downloads.
 
-**Determinismo.** Bootstraps e permutações usam sementes fixas. As fontes oficiais republicam arquivos com correções. Se `src.manifesto --conferir` acusar diferença, os resultados podem mudar marginalmente. Os arquivos usados na publicação foram baixados entre 25 e 28/10/2026.
+**Determinismo.** Bootstraps e permutações usam sementes fixas (no estudo 1, as do Moran global desde 31/10/2026). As fontes oficiais republicam arquivos com correções. Se `src.manifesto --conferir` acusar diferença, os resultados podem mudar marginalmente. Os arquivos usados na publicação foram baixados entre 25 e 31/10/2026 (os `*_munzona_2026` são os republicados pelo TSE em 30–31/10/2026, já com o 2º turno).
 
 **Testes.** `pytest tests/` verifica cada fase: totais que batem com as fontes, ausência de duplicatas, faixas plausíveis, coerência entre tabelas e existência das figuras. Testes de fases não rodadas são pulados.
 
@@ -78,7 +78,8 @@ Todas são públicas e baixadas por script. Datas de acesso e versões estão na
 | Fonte | Uso | Estudos |
 |---|---|---|
 | TSE, Dados Abertos (CDN `cdn.tse.jus.br/estatistica/sead/odsele`) | Resultados por município e zona (1994–2026), por seção, locais de votação, perfil do eleitorado, comparecimento por idade e sexo | 1, 2, 3 |
-| TSE, Portal Resultados | 2º turno presidencial de 2026 (não publicado no CDN quando o painel foi montado) | 1, 2, 3 |
+| TSE, boletins de urna (`buweb`) | Conferência seção a seção do 2º turno de 2026 | 2 |
+| TSE, Portal Resultados | Crosswalk TSE→IBGE; total de deputado federal por UF (check); 2º turno presidencial de 2026 como fallback (usado até o TSE republicar os arquivos do CDN em 30–31/10/2026; resultados idênticos) | 1, 2, 3 |
 | IBGE (SIDRA, API de localidades, FTP do Censo 2022, `geobr`) | População, PIB, Censo 2010/2022 (raça, religião, trabalho, idade), setores censitários 2022, malhas | 1, 2 |
 | INEP | Ideb | 1 |
 | Ipeadata | Bolsa Família, IDHM (Atlas do Desenvolvimento Humano) | 1 |

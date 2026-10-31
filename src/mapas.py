@@ -38,7 +38,7 @@ plt.rcParams.update({
     "axes.edgecolor": "none", "figure.facecolor": "#fcfcfb", "savefig.facecolor": "#fcfcfb",
 })
 
-FONTE_PRES = "Fonte: TSE, 2º turno presidencial (2026: Portal Resultados). Malha: IBGE 2022 (geobr), em AMCs."
+FONTE_PRES = "Fonte: TSE, 2º turno presidencial. Malha: IBGE 2022 (geobr), em AMCs."
 FONTE_PROP = "Fonte: TSE, votação para deputado federal por partido. Malha: IBGE 2022 (geobr), em AMCs."
 
 

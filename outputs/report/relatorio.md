@@ -40,7 +40,7 @@
 | Item | Escolha |
 |---|---|
 | Unidade | AMC 2010–2026: 5.565 unidades (6 municípios instalados depois de 2010 fundidos ao de origem) |
-| Voto presidencial | 2º turno 2006–2026, TSE (CDN Dados Abertos; 2026 pelo Portal Resultados), sem exterior e trânsito |
+| Voto presidencial | 2º turno 2006–2026, TSE (CDN Dados Abertos; 2026 conferido contra o Portal Resultados), sem exterior e trânsito |
 | Voto proporcional | Deputado federal, nominal + legenda, PT e partido antipetista do ano (PSDB → PSL → PL) |
 | Covariáveis anuais | População (IBGE), PIB e VAB (IBGE, PIB dos Municípios), Ideb (INEP), Bolsa Família (MDS via Ipeadata), exportações (Comex Stat), em R$ de dez/2025 (IPCA) |
 | Covariáveis censitárias | Raça, religião, desocupação e informalidade (Censos 2010 e 2022, amostra); IDHM 2010 (Atlas DH) |
@@ -63,7 +63,7 @@
 
 ![Swing relativo 2010→2026 e grupos de swing](../figures/fase2_mapa_swing.png)
 
-*Figura 1. Swing relativo do PT de 2010 a 2026 e grupos G_PT / G_EST / G_OP (±1 DP). Fonte: TSE, 2º turno presidencial de 2010 e 2026 (2026: Portal Resultados); malha IBGE 2022 (geobr), em AMCs.*
+*Figura 1. Swing relativo do PT de 2010 a 2026 e grupos G_PT / G_EST / G_OP (±1 DP). Fonte: TSE, 2º turno presidencial de 2010 e 2026; malha IBGE 2022 (geobr), em AMCs.*
 
 | Grupo | AMCs | % do eleitorado |
 |---|---|---|

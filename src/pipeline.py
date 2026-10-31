@@ -44,7 +44,8 @@ class Etapa:
 ETAPAS = [
     # ---------------- Estudo 1: painel municipal 2006–2026
     Etapa("1.01", "TSE: resultados por município × zona (2006–2026)", "src.ingest.tse_download", rede=True),
-    Etapa("1.02", "TSE: Portal Resultados (2º turno de 2026; deputado federal por UF)", "src.ingest.tse_portal", rede=True),
+    Etapa("1.02", "TSE: Portal Resultados (crosswalk de municípios; 2º turno de 2026 como fallback; deputado federal por UF)",
+          "src.ingest.tse_portal", rede=True),
     Etapa("1.03", "Fase 1: 2º turno presidencial por AMC", "src.ingest.tse"),
     Etapa("1.04", "Fase 1B: voto proporcional (deputado federal)", "src.ingest.tse_proporcional"),
     Etapa("1.05", "Malha municipal e AMCs (geobr)", "src.ingest.malhas", rede=True),
@@ -88,6 +89,8 @@ ETAPAS = [
     Etapa("2.11", "Fase C: mobilização entre turnos em cinco eleições", "src.pacto20_modelos", ["c4comp"]),
     Etapa("2.12", "Extra: comparecimento por sexo", "src.pacto20_sexo"),
     Etapa("2.13", "Fase E: figuras", "src.pacto20_saidas"),
+    Etapa("2.14", "Boletins de urna do 2º turno de 2026", "src.ingest.tse_bu", rede=True),
+    Etapa("2.15", "Conferência: boletins de urna × arquivos por seção", "src.pacto20_bu"),
     # ---------------- Estudo 3: polarização comparada
     Etapa("3.01", "V-Dem v16, ERT v16, UCDP/PRIO 25.1, Archigos 4.1", "src.ingest.p3_dados", rede=True),
     Etapa("3.02", "Fase A: painel país-ano", "src.p3_painel"),
